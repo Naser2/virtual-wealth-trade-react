@@ -1,3 +1,36 @@
+Desc: A virtual Currency trade app 
+
+Delivrables: 
+<!-- 1 - As a user I should be able to sign up with a name, email and pw. -->
+2 - As a user I should be able to search for currencies by name 
+
+<!-- 3 - As a user I should be able to save currencies i like to get updates on (CREATE) --> Monday
+
+<!-- 4 - As a user I should be able to remove currency  --> Monday
+
+Nav Bar: [home:{sign-up/login}, profile] 
+Search Bar: [fetch]  => Grab the data && onClick we will send "info" to the backend to the fetch call the api 
+Api will return Curencies 
+
+return to colletction Will iterate and give it to a presentation l currencies component 
+
+Presentational Comp:  Symbole: $ name: Bitcoin Data[: curent price and previous privous (hour ago)]
+
+<!-- On select - user can save a currency  --> Monday
+
+
+
+
+<!-- USER AUTH: Use local storage to save user token for now  -->
+<!-- create an Endpoint: 'Get current user"  --> Monday
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
