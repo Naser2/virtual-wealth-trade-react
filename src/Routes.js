@@ -15,7 +15,7 @@ const Routes = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/currency" component={Currency} />
-      <Route component={NoMatch} />
+      
     </Fragment>
 
 </Router>
