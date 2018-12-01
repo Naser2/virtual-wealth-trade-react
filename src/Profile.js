@@ -40,7 +40,7 @@ class Profile extends Component {
   showEditOrProfile = () => {
     if (this.state.edit){
       return(
-        <Form name="Tyler" username="tsh" password="123" patchOrPost={this.patchOrPost}/>
+        <Form showName={true} name="Tyler" username="tsh" password="123" SubmitHandler={this.patchOrPost}/>
         )
     }
     else if (this.state.delete) {

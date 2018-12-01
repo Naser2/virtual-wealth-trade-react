@@ -16,20 +16,23 @@ export default class Form extends Component{
 
   submitHandler = (e) =>{
     e.preventDefault()
-      if(this.state.name.length===0 || this.state.username.length===0 || this.state.password.length===0){
+      if((this.state.username.length===0 || this.state.password.length===0) && this.props.showName===false){
+      alert('Fields cannot be left blank.')
+    }
+    else if((this.state.username.length===0 || this.state.password.length===0 || this.state.name.length===0) && this.props.showName===true){
       alert('Fields cannot be left blank.')
     }
     else{
-      this.props.patchOrPost(this.state)
+      this.props.SubmitHandler(this.state)
     }
   }
 
   render(){
     return (
       <form onSubmit={(e) => this.submitHandler(e)}>
-      <label htmlFor="name">Name</label>
-      <input type ="text" name="name" value={this.state.name} onChange={this.changeHandler}/>
-      <br/>
+      {this.props.showName ? <label htmlFor="name">Name</label> : null}
+      {this.props.showName ? <input type ="text" name="name" value={this.state.name} onChange={this.changeHandler}/> : null}
+      {this.props.showName ? <br/> : null}
       <label htmlFor="username">Username</label>
       <input type ="text" name="username" value={this.state.username} onChange={this.changeHandler}/>
       <br/>

@@ -4,24 +4,65 @@ import Form from './components/containers/Form'
 
 class Home extends Component {
   state={
-    login:true,
+    initial:true,
+    signup:false,
+    login:false
   }
-  patchOrPost = (obj) =>{
+  signupForm = (obj) =>{
+    this.setState({
+      signup:true,
+      initial:false
+    })
+  }
+
+  signupHandler =(obj)=>{
     axios.post(`http://localhost:3000/users`,{name:obj.name,username:obj.username,password:obj.password})
-    this.setState({login:false})
+    this.setState({signup:true})
   }
+
+  loginForm = () =>{
+    this.setState({
+      login:true,
+      initial:false
+    })
+  }
+
+  loginHandler = (obj) =>{
+    axios.get(`http://localhost:3000/users/${obj.username}`)
+    .then(response => console.log(response.data))
+  }
+
   loginRender = () => {
-    if (this.state.login){
-      return <Form name="" username="" password="" patchOrPost={this.patchOrPost}/>
+
+    if (this.state.initial===true){
+      return(
+        <div>
+        <button onClick={this.signupForm}>Sign Up</button>
+        <button onClick={this.loginForm}>Login</button>
+        </div>
+      )
+      }
+      else if(this.state.signup===true){
+        return <Form showName={true} name="" username="" password="" SubmitHandler={this.signupHandler}/>
+
+      }
+      else if(this.state.login===true){
+        return <Form showName={false} name="" username="" password="" SubmitHandler={this.loginHandler}/>
+
       }
       else{
         //person is logged in, show search component,currencyContainer, etc.
       }
   }
+
+  LoggedIn = () => {
+
+  }
   render() {
     return (
       <div>
         {/*this.loginRender()*/}
+        {this.LoggedIn()}
       </div>
     )
   }
