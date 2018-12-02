@@ -11,8 +11,6 @@ class Profile extends Component {
     redirect:false,
   }
 
-
-
   editHandler = () =>{
     this.setState({
       edit:true

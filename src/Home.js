@@ -12,13 +12,15 @@ class Home extends Component {
     login:false,
     search:'',
     cryptos: [],
-    searchedCurrencies: []
+    rerender: [],
+    loggedIn: localStorage.getItem('token')
   }
 
   componentDidMount(){
     axios.get(`http://localhost:3000/cryptos`)
       .then(res => this.setState({
-        cryptos: res.data
+        cryptos: res.data,
+        rerender: res.data
       },() => console.log('All Cryptos', this.state.cryptos)) 
     )
   }
@@ -28,10 +30,12 @@ class Home extends Component {
     this.setState({
       search: e.target.value
     }, () => {
-      axios.get(`http://localhost:3000/cryptos/${this.state.search}`)
-      .then(res => this.setState({
-        searchedCurrencies: res
-      },() => console.log('updated state', this.state.searchedCurrencies)))      
+
+      const regex = new RegExp(this.state.search, "i");
+      const filteredCurrencies = this.state.cryptos.filter(crypto => regex.test(crypto.name));
+      this.setState({
+        rerender: filteredCurrencies
+      })
     })
   }
 
@@ -91,11 +95,11 @@ handleOnHomeCurrency = () => {
   }
   render() {
     // console.log('updated state', this.state.cryptos.data.currencies.data)
-    const  cryptos = this.state.cryptos
+    const  {rerender} = this.state;
     return (
       <div>
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/>
-        <CurrencyCollection cryptos={cryptos} handleOnHomeCurrency ={this.handleOnHomeCurrency} />
+        <CurrencyCollection cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} handleOnHomeCurrency ={this.handleOnHomeCurrency} />
         {/*this.loginRender()*/}
         {this.LoggedIn()}
       </div>

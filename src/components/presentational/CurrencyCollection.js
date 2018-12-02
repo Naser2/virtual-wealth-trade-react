@@ -4,25 +4,37 @@ import Currency from './Currency';
 export default class CurrencyCollection extends Component {
   render() {
     console.log('CurrencyCollection cryptos:', this.props)
-    let {cryptos, handleOnHomeCurrency} = this.props
-    console.log('CurrencyCollection check:',cryptos)
-    const  crypto = Object.keys(cryptos).forEach(item => item); 
-    console.log(crypto)
-    // const crypto = cryptos.map(crypto => {
-    //   return ( <Currency key={crypto.id}
-    //            crypto={crypto}
-    //            handleOnHomeCurency ={handleOnHomeCurrency}
-    //     />
-    //   )}
-    // )
+    let { cryptos, handleOnHomeCurrency } = this.props
+
+    let cryptoArr = cryptos.map(cryptoObj => {
+      return <Currency key={cryptoObj.id} crypto={cryptoObj} />
+    })
+
+
+    console.log(cryptoArr)
 
     return (
-      <Fragment>
-      <h1><label htmlFor="cryptos">Currencies Collection</label></h1>
-    </Fragment>
+        <div className="ui raised container segment">
+          <h1 className="ui block header">Order Form</h1>
+          <form className="ui form" id="order-form" onSubmit={this.handleSubmit}>
+          <div className="inline fields ui centered grid">
+            {cryptoArr}
+            </div>
+
+            <br />
+
+            <button className="ui blue big button" type="submit">Save</button>
+          </form>
+        </div>
     )
   }
 }
 
 
 
+//     const returnObj = (obj) => {
+//       for(var key in cryptos) {
+//        return  <Currency key={cryptos[key].id} crypto={cryptos[key]} handleOnHomeCurrency={handleOnHomeCurrency} />
+//         // console.log(key, cryptos[key].name)
+//    }
+// }

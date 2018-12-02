@@ -14,7 +14,9 @@ export default class NavBar extends Component {
 
 
   checkUser = () => {
-    console.log('In check User')
+    localStorage.removeItem('token')
+    console.log('In check User');
+    this.props.history.replace('/')
   }
    greetUser = () => {
     return(  
@@ -27,8 +29,9 @@ export default class NavBar extends Component {
   render() {
     return (
       <div>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/profile">Profile</NavLink>
+        <NavLink to="/">Home</NavLink>{" "}
+        <NavLink to="/profile">Profile</NavLink>{" "}
+        <NavLink to="/login">Login</NavLink>
        {this.state.name ? this.greetUser() : console.log('Nobody home') }
       </div>
     )
