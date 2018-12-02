@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import Form from './components/containers/Form'
 import axios from 'axios'
 import {Redirect} from 'react-router'
+import Search from './SearchBar'
 class Profile extends Component {
   state={
     edit: false,
     editted:false,
     delete: false,
-    redirect:false
+    redirect:false,
   }
+
+
+
   editHandler = () =>{
     this.setState({
       edit:true
@@ -40,7 +44,7 @@ class Profile extends Component {
   showEditOrProfile = () => {
     if (this.state.edit){
       return(
-        <Form showName={true} name="Tyler" username="tsh" password="123" SubmitHandler={this.patchOrPost}/>
+        <Form showName={true} name="Nasser" username="Nas" password="123" SubmitHandler={this.patchOrPost}/>
         )
     }
     else if (this.state.delete) {
@@ -73,6 +77,7 @@ class Profile extends Component {
 
     return (
       <div>
+      
       {this.showEditOrProfile()}
     </div>
     )
