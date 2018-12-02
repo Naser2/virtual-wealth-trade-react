@@ -5,8 +5,9 @@ export default class CurrencyCollection extends Component {
   render() {
     console.log('CurrencyCollection cryptos:', this.props)
     let {cryptos, handleOnHomeCurrency} = this.props
-    console.log('CurrencyCollection:',cryptos, handleOnHomeCurrency)
-    //  console.log( cryptos.map(crypto => crypto.name))
+    console.log('CurrencyCollection check:',cryptos)
+    const  crypto = Object.keys(cryptos).forEach(item => item); 
+    console.log(crypto)
     // const crypto = cryptos.map(crypto => {
     //   return ( <Currency key={crypto.id}
     //            crypto={crypto}

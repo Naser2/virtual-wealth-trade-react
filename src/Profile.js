@@ -18,11 +18,13 @@ class Profile extends Component {
       edit:true
     })
   }
+
   deleteHandler = () => {
     this.setState({
       delete:true
     })
   }
+
   patchOrPost = (obj) =>{
     axios.patch(`http://localhost:3000/users/${obj.id}`,{name:obj.name,username:obj.username,password:obj.password})
     .then(response => this.setState({
@@ -30,17 +32,20 @@ class Profile extends Component {
       edit:false
     })
   )}
+
   YesHandler = () =>{
     axios.delete(`http://localhost:3000/users/7`)
     this.setState({
       redirect:true,
       delete:false
     })}
+
   NoHandler = () =>{
     this.setState({
       delete:false
     })
   }
+  
   showEditOrProfile = () => {
     if (this.state.edit){
       return(

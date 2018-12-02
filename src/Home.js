@@ -18,7 +18,7 @@ class Home extends Component {
   componentDidMount(){
     axios.get(`http://localhost:3000/cryptos`)
       .then(res => this.setState({
-        cryptos: res.data.currencies.data
+        cryptos: res.data
       },() => console.log('All Cryptos', this.state.cryptos)) 
     )
   }
