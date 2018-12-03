@@ -5,6 +5,8 @@ import Search from './SearchBar';
 import {SearchBar } from 'material-ui-search-bar';
 import { AutoComplete } from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import SignupForm from './SignupForm'
+
 
 import CurrencyCollection from './components/presentational/CurrencyCollection'
 
