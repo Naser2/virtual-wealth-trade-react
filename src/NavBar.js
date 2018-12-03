@@ -7,9 +7,9 @@ import { NavLink } from 'react-router-dom'
 export default class NavBar extends Component {
 
   state = {
-    name: 'Tyler',
-    userName: 'tyler@something',
-    password: '123'
+    name: '',
+    userName: '',
+    password: ''
   }
 
 
@@ -38,7 +38,7 @@ export default class NavBar extends Component {
         <NavLink to="/login">Login</NavLink>
         </div> 
         <div className="right item">
-        {this.state.name ? this.greetUser() : alert('Nobody home') }
+        {this.state.name ? this.greetUser() : console.log('Nobody home') }
         </div> 
 
        

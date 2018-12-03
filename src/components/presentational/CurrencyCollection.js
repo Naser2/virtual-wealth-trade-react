@@ -15,7 +15,7 @@ export default class CurrencyCollection extends Component {
 
     return (
         <div className="ui raised container segment">
-          <h1 className="ui block header">Order Form</h1>
+          <h1 className="ui block header">Top 20 Currencies and More</h1>
           <form className="ui form" id="order-form" onSubmit={this.handleSubmit}>
           <div className="inline fields ui centered grid">
             {cryptoArr}
