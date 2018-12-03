@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import Form from './components/containers/Form'
-import Search from './SearchBar'
+import axios from 'axios';
+import Form from './components/containers/Form';
+import Search from './SearchBar';
+import {SearchBar } from 'material-ui-search-bar';
+import { AutoComplete } from 'material-ui/AutoComplete';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import CurrencyCollection from './components/presentational/CurrencyCollection'
 
 
@@ -98,7 +102,8 @@ handleOnHomeCurrency = () => {
     const  {rerender} = this.state;
     return (
       <div>
-        <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/>
+        <MuiThemeProvider>
+        <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
         <CurrencyCollection cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} handleOnHomeCurrency ={this.handleOnHomeCurrency} />
         {/*this.loginRender()*/}
         {this.LoggedIn()}
