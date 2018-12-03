@@ -1,5 +1,5 @@
 import React, { Fragment, Switch } from "react";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from './Home';
 import Profile from './Profile';
 import Login from './components/Login';
@@ -16,14 +16,13 @@ import SignupForm from './SignupForm'
 const Routes = () => (
   <Router>
     <Fragment>
-     <NavBar/>
-     <switch>
+     <NavBar />
       <Route exact path="/" component={Home} />
-      <Route exact path="/singup" component={SignupForm} />
+      <Route exact path="/signupForm" component={SignupForm} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/currency" component={Currency} />
-    </switch>
+ 
     </Fragment>
 
 </Router>

@@ -27,7 +27,7 @@ class Home extends Component {
       .then(res => this.setState({
         cryptos: res.data,
         rerender: res.data
-      },() => console.log('All Cryptos', this.state.cryptos)) 
+      }) 
     )
   }
 
@@ -58,7 +58,9 @@ handleOnHomeCurrency = () => {
 
   signupHandler =(obj)=>{
     axios.post(`http://localhost:3000/users`,{name:obj.name,username:obj.username,password:obj.password})
-    this.setState({signup:true})
+    this.setState({
+      signup:true
+    })
   }
 
   loginForm = () =>{
@@ -99,6 +101,7 @@ handleOnHomeCurrency = () => {
   LoggedIn = () => {
 
   }
+
   render() {
     // console.log('updated state', this.state.cryptos.data.currencies.data)
     const  {rerender} = this.state;

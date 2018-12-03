@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route } from 'react-router-dom'
 import Routes from './Routes';
-import NavBar from './NavBar'
+
 
 
 // will have Nav bar[search] and main components 
