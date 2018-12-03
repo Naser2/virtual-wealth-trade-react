@@ -19,20 +19,29 @@ export default class NavBar extends Component {
     this.props.history.replace('/')
   }
    greetUser = () => {
-    return(  
-           <div>
-             <p></p>
-             <NavLink onClick={this.checkUser} to="/">Logout</NavLink>
+    return( <div>
+              <NavLink onClick={this.checkUser} to="/">Logout</NavLink>
            </div>)
    }
 
   render() {
     return (
-      <div>
-        <NavLink to="/">Home</NavLink>{" "}
-        <NavLink to="/profile">Profile</NavLink>{" "}
+      <div className="ui menu" >
+        <div className="item">
+
+        <NavLink to="/">Home</NavLink>
+        </div> 
+        <div className="item">
+        <NavLink to="/profile">Profile</NavLink>
+        </div> 
+        <div className="item">
         <NavLink to="/login">Login</NavLink>
-       {this.state.name ? this.greetUser() : console.log('Nobody home') }
+        </div> 
+        <div className="right item">
+        {this.state.name ? this.greetUser() : alert('Nobody home') }
+        </div> 
+
+       
       </div>
     )
   }
