@@ -13,12 +13,12 @@ export default class LogIn extends Component {
     console.log('Login deatailsss', username, password)
 
     axios.post('http://localhost:3000/auth/login', {
-      username, password //can send this.state instead if preffered and know whats in state 
+       username: 'nas', password:123//can send this.state instead if preffered and know whats in state 
     }).then(res => {
       localStorage.setItem('token', res.data.token);
       console.log('res from backend', this);
       this.props.history.replace('/') //route props
-    }).catch(err => console.log('login errr', err))
+    }).catch(err => console.log('login err', err))
   }
 
   handleChange = (e) => {
@@ -28,6 +28,7 @@ export default class LogIn extends Component {
   }
 
   render() {
+    console.log('sssss', this.props);
     return (
           <div>
             <form onSubmit={this.loginUser}>

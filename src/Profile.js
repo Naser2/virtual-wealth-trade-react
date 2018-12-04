@@ -77,11 +77,12 @@ class Profile extends Component {
     }
   }
   render() {
-
+    console.log('sdsadada', this.props)
     return (
       <div>
-      
+     hhhhh
       {this.showEditOrProfile()}
+     hello Profile
     </div>
     )
   }

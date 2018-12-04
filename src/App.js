@@ -5,7 +5,7 @@ import Routes from './Routes';
 
 
 // will have Nav bar[search] and main components 
-class App extends Component {
+class App extends Component {         
   render() {
     return (
       <div className="App">

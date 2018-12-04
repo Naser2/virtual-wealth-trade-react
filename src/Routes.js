@@ -20,9 +20,8 @@ const Routes = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/signupForm" component={SignupForm} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/Profile" component={Profile} />
       <Route exact path="/currency" component={Currency} />
- 
     </Fragment>
 
 </Router>

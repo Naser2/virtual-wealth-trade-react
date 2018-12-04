@@ -2,7 +2,7 @@ Desc: A virtual Currency trade app
 
 Delivrables: 
 <!-- 1 - As a user I should be able to sign up with a name, email and pw. -->
-2 - As a user I should be able to search for currencies by name 
+<!-- 2 - As a user I should be able to search for currencies by name  -->
 
 <!-- 3 - As a user I should be able to save currencies i like to get updates on (CREATE) --> Monday
 

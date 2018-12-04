@@ -9,6 +9,7 @@ import SignupForm from './SignupForm'
 
 
 import CurrencyCollection from './components/presentational/CurrencyCollection'
+import Profile from './Profile';
 
 
 class Home extends Component {
@@ -19,7 +20,7 @@ class Home extends Component {
     search:'',
     cryptos: [],
     rerender: [],
-    loggedIn: localStorage.getItem('token')
+    loggedIn: localStorage.getItem('token') //retrive in local 
   }
 
   componentDidMount(){
@@ -45,9 +46,9 @@ class Home extends Component {
     })
   }
 
-handleOnHomeCurrency = () => {
-    console.log("hello Currencies")
-  }
+// handleOnHomeCurrency = () => {
+//     console.log("hello Currencies")
+//   }
 
   signupForm = (obj) =>{
     this.setState({
@@ -103,13 +104,20 @@ handleOnHomeCurrency = () => {
   }
 
   render() {
+    // let comp;
+    // //console.log('checkkkkk', window.location);
+    // if (window.location.pathname === '/profile') {
+    //   comp = <CurrencyCollection cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} />
+    // } else {
+    //   comp = <Profile sele />
+    // }
     // console.log('updated state', this.state.cryptos.data.currencies.data)
     const  {rerender} = this.state;
     return (
       <div>
         <MuiThemeProvider>
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
-        <CurrencyCollection cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} handleOnHomeCurrency ={this.handleOnHomeCurrency} />
+        <CurrencyCollection cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} />        
         {/*this.loginRender()*/}
         {this.LoggedIn()}
       </div>
