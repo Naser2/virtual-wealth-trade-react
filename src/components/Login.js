@@ -7,19 +7,7 @@ export default class LogIn extends Component {
     password: ''
   }
 
-  loginUser = (e) => {
-    e.preventDefault();
-    const {username, password} = this.state;
-    console.log('Login deatailsss', username, password)
 
-    axios.post('http://localhost:3000/auth/login', {
-       username: 'nas', password:123//can send this.state instead if preffered and know whats in state 
-    }).then(res => {
-      localStorage.setItem('token', res.data.token);
-      console.log('res from backend', this);
-      this.props.history.replace('/') //route props
-    }).catch(err => console.log('login err', err))
-  }
 
   handleChange = (e) => {
     this.setState({
@@ -28,10 +16,9 @@ export default class LogIn extends Component {
   }
 
   render() {
-    console.log('sssss', this.props);
     return (
           <div>
-            <form onSubmit={this.loginUser}>
+            <form onSubmit={(e) => this.props.loginUser(e,this.state)}>
               <div>
                 <input type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
                 <label htmlFor="username">Username</label>

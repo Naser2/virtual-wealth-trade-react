@@ -19,8 +19,8 @@ class Home extends Component {
     login:false,
     search:'',
     cryptos: [],
-    rerender: [],
-    loggedIn: localStorage.getItem('token') //retrive in local 
+    rerender: []
+     //retrive in local
   }
 
   componentDidMount(){
@@ -28,7 +28,7 @@ class Home extends Component {
       .then(res => this.setState({
         cryptos: res.data,
         rerender: res.data
-      }) 
+      })
     )
   }
 
@@ -117,7 +117,7 @@ class Home extends Component {
       <div>
         <MuiThemeProvider>
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
-        <CurrencyCollection cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} />        
+        <CurrencyCollection active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} />
         {/*this.loginRender()*/}
         {this.LoggedIn()}
       </div>

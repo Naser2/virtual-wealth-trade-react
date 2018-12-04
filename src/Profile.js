@@ -3,12 +3,23 @@ import Form from './components/containers/Form'
 import axios from 'axios'
 import {Redirect} from 'react-router'
 import Search from './SearchBar'
+import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
+
 class Profile extends Component {
   state={
     edit: false,
     editted:false,
     delete: false,
     redirect:false,
+  }
+
+  componentDidMount(){
+    if (this.props.loginUser===null){
+      this.props.history.replace('/')
+    }
+    if (this.props.loginUser !== null){
+      console.log("have a user")
+    }
   }
 
   editHandler = () =>{
@@ -43,7 +54,7 @@ class Profile extends Component {
       delete:false
     })
   }
-  
+
   showEditOrProfile = () => {
     if (this.state.edit){
       return(
@@ -80,7 +91,7 @@ class Profile extends Component {
     console.log('sdsadada', this.props)
     return (
       <div>
-     hhhhh
+     Hello
       {this.showEditOrProfile()}
      hello Profile
     </div>
@@ -88,4 +99,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default withRouter(Profile)
