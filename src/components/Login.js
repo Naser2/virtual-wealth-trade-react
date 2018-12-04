@@ -12,8 +12,8 @@ export default class LogIn extends Component {
     const {username, password} = this.state;
     console.log('Login deatailsss', username, password)
 
-    axios.post('http://localhost:3000/auth/login', {
-       username: 'nas', password:123//can send this.state instead if preffered and know whats in state 
+    axios.post('http://localhost:3001/auth/login', {
+       username, password//can send this.state instead if preffered and know whats in state 
     }).then(res => {
       localStorage.setItem('token', res.data.token);
       console.log('res from backend', this);

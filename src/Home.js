@@ -24,7 +24,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    axios.get(`http://localhost:3000/cryptos`)
+    axios.get(`http://localhost:3001/cryptos`)
       .then(res => this.setState({
         cryptos: res.data,
         rerender: res.data
@@ -58,7 +58,7 @@ class Home extends Component {
   }
 
   signupHandler =(obj)=>{
-    axios.post(`http://localhost:3000/users`,{name:obj.name,username:obj.username,password:obj.password})
+    axios.post(`http://localhost:3001/users`,{name:obj.name,username:obj.username,password:obj.password})
     this.setState({
       signup:true
     })
@@ -72,7 +72,7 @@ class Home extends Component {
   }
 
   loginHandler = (obj) =>{
-    axios.get(`http://localhost:3000/users/${obj.username}`)
+    axios.get(`http://localhost:3001/users/${obj.username}`)
     .then(response => console.log(response.data))
   }
 

@@ -24,7 +24,7 @@ class Profile extends Component {
   }
 
   patchOrPost = (obj) =>{
-    axios.patch(`http://localhost:3000/users/${obj.id}`,{name:obj.name,username:obj.username,password:obj.password})
+    axios.patch(`http://localhost:3001/users/${obj.id}`,{name:obj.name,username:obj.username,password:obj.password})
     .then(response => this.setState({
       editted:true,
       edit:false
@@ -32,7 +32,7 @@ class Profile extends Component {
   )}
 
   YesHandler = () =>{
-    axios.delete(`http://localhost:3000/users/7`)
+    axios.delete(`http://localhost:3001/users/7`)
     this.setState({
       redirect:true,
       delete:false
