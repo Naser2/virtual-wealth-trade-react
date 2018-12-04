@@ -10,27 +10,28 @@ export default class CurrencyCollection extends Component {
 
 
   handleCoinsChange = (event) => {
-    console.log('event traget CHECKED: ', event.target)
-    console.log(' In Currency Selectorrrr', "name:", event.target.name, "value:", event.target.value)
+    // console.log('event traget CHECKED: ', event.target)
+    // console.log(' In Currency Selectorrrr', "name:", event.target.name, "value:", event.target.value)
     const itemType = event.target.name
     const itemId = event.target.id
-    const coin = this.props.cryptos.find(selected => selected.id == itemId);// Add to selected coin - && 
+    const coin = this.props.cryptos.find(selected => selected.id == itemId);// Add to selected coin - &&
     this.setState({
       selectedCoins: this.state.selectedCoins.concat(coin)
     })
   }
-
+  handleSubmit = () =>{
+    console.log("submitted")
+  }
   render() {
-    console.log('CurrencyCollection cryptos:', this.props)
     let { cryptos } = this.props
     let cryptoArr = cryptos.map(cryptoObj => {
-      return <Currency key={cryptoObj.id} crypto={cryptoObj}
+      return <Currency key={cryptoObj.id} crypto={cryptoObj} active={this.props.active}
         selectedCoins={this.state.selectedCoins} handleCoinsChange={this.handleCoinsChange}
       />
     })
 
 
-    console.log(cryptoArr)
+
 
     return (
       <div className="ui raised container segment">
@@ -38,9 +39,9 @@ export default class CurrencyCollection extends Component {
         <form className="ui form" id="order-form" onSubmit={this.handleSubmit}>
         <form>
           <div className="inline fields ui centered grid">
-            
+
               {cryptoArr}
-            
+
 
           </div>
           </form>
@@ -53,6 +54,3 @@ export default class CurrencyCollection extends Component {
     )
   }
 }
-
-
-
