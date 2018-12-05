@@ -4,6 +4,8 @@ import axios from 'axios'
 import {Redirect} from 'react-router'
 import Search from './SearchBar'
 import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
+import CurrencyCollection from './components/presentational/CurrencyCollection'
+import CoinDetails from './CoinDetails'
 
 class Profile extends Component {
   state={
@@ -11,7 +13,10 @@ class Profile extends Component {
     editted:false,
     delete: false,
     redirect:false,
-    selected:[]
+    selected:[],
+    theCoin: null,
+    showCoin:false
+
   }
 
   componentDidMount(){
@@ -98,6 +103,21 @@ class Profile extends Component {
 
     }
   }
+
+  imageHandler = (obj) => {
+    console.log("image handler")
+    this.setState({
+      theCoin:obj,
+      showCoin:true
+    })
+  }
+
+  BackHandler = () => {
+    this.setState({
+      theCoin: null,
+      showCoin:false
+    })
+  }
   render() {
 
     //console.log('MY PROPSSS', this.props)
@@ -105,14 +125,11 @@ class Profile extends Component {
     //console.log(this.props.loginUser, 'this.props.loginUser')
     return (
       <div>
-     Hello
       {this.showEditOrProfile()}
       <ul id="list">
-        { 
-          this.state.selected.map(asset => (
-            <li>{asset.name}</li>
-          ))
-        }
+        <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.selected} activeUser={this.props.activeUser} profile={true}/>
+          {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} /> :null}
+
       </ul>
     </div>
     )

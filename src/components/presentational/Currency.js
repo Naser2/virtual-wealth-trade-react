@@ -4,7 +4,7 @@ export default class Currency extends Component {
   constructor() {
     super()
     this.state = {
-      checked: false,
+      checked: false
     }
   }
   showCheckBox= () =>{
@@ -23,15 +23,16 @@ export default class Currency extends Component {
       return null
     }
   }
+
   render() {
     const crypto = this.props.crypto
     return (
       <div className="field">
-      
+
         {/* <div  className="ui checkbox" > */}
         {this.showCheckBox()}
 
-        <img src={`https://s2.coinmarketcap.com/static/img/coins/32x32/${crypto.id}.png`} height="40px" width="40px" alt="image" />
+        <img onClick={()=>this.props.imageHandler(this.props.crypto)} src={`https://s2.coinmarketcap.com/static/img/coins/32x32/${crypto.id}.png`} height="40px" width="40px" alt="image" />
         <label htmlFor={crypto.name}>{crypto.name}</label>
       </div>
       // </div>

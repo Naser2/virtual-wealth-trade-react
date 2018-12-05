@@ -8,6 +8,7 @@ import axios from 'axios'
 export default class CurrencyCollection extends Component {
   state = {
     selectedCoins: []
+
   }
 
   handleCoinsChange = (event) => {
@@ -39,22 +40,22 @@ export default class CurrencyCollection extends Component {
       oldAssets =  JSON.parse(oldAssets);
       //if user already saved assets
       if(oldAssets[username]){ //if user has assets in localStorage
-        oldAssets[username] = [ //lets add the existing assets + the 
-          ...oldAssets[username], 
+        oldAssets[username] = [ //lets add the existing assets + the
+          ...oldAssets[username],
           ...this.state.selectedCoins
         ]
       } else {
-        oldAssets = { ...oldAssets, ...assets}; 
+        oldAssets = { ...oldAssets, ...assets};
       }
       localStorage.setItem('assets', JSON.stringify(oldAssets))  //stringify
     } else {
-      localStorage.setItem('assets', JSON.stringify(assets)) 
+      localStorage.setItem('assets', JSON.stringify(assets))
     }
-    
+
 
     // this.state.selectedCoins.forEach((c) => {
     //   axios.post(`http://localhost:3000/assets`,
-    //   { 
+    //   {
     //     name: c.name,
     //     price:c.price,
     //     symbol:c.symbol,
@@ -68,26 +69,27 @@ export default class CurrencyCollection extends Component {
     //     percent_change_1h:c.percent_change_1h,
     //     percent_change_24h :c.percent_change_24h,
     //     percent_change_7d :c.percent_change_7d,
-    //   }) 
+    //   })
     // })
-   
+
 
 
   }
+
   render() {
-   
+
     let { cryptos } = this.props
-    
-    console.log("Crypto IDDDDD:", cryptos)
+
+    // console.log("Crypto IDDDDD:", cryptos)
     let cryptoArr = cryptos.map(cryptoObj => {
-      return <Currency key={cryptoObj.id} crypto={cryptoObj} active={this.props.active}
-        selectedCoins={this.state.selectedCoins} handleCoinsChange={this.handleCoinsChange} 
+      return <Currency imageHandler={this.props.imageHandler} key={cryptoObj.id} crypto={cryptoObj} active={this.props.active}
+        selectedCoins={this.state.selectedCoins} handleCoinsChange={this.handleCoinsChange}
       />
     })
 
     return (
       <div className="ui raised container segment">
-        <h1 className="ui block header">Top 20 Currencies and More</h1>
+      {this.props.profile ? <h1 className="ui block header">Your Currencies</h1> :<h1 className="ui block header">Top 20 Currencies and More</h1> }
         <form className="ui form" id="order-form" onSubmit={this.handleSubmit}>
         <form>
           <div className="inline fields ui centered grid">
@@ -95,8 +97,9 @@ export default class CurrencyCollection extends Component {
           </div>
           </form>
           <br />
-          <button className="ui blue big button" type="submit">Save</button>
+        {this.props.profile ? null : <button className="ui blue big button" type="submit">Save</button>}
         </form>
+        
       </div>
     )
   }

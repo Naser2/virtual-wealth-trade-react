@@ -6,7 +6,7 @@ import {SearchBar } from 'material-ui-search-bar';
 import { AutoComplete } from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import SignupForm from './SignupForm'
-
+import CoinDetails from './CoinDetails'
 
 import CurrencyCollection from './components/presentational/CurrencyCollection'
 import Profile from './Profile';
@@ -19,7 +19,9 @@ class Home extends Component {
     login:false,
     search:'',
     cryptos: [],
-    rerender: []
+    rerender: [],
+    theCoin:null,
+    showCoin:false
   }
 
   componentDidMount(){
@@ -93,18 +95,32 @@ class Home extends Component {
       }
   }
 
-  LoggedIn = () => {}
+  imageHandler = (obj) => {
+    console.log("image handler")
+    this.setState({
+      theCoin:obj,
+      showCoin:true
+    })
+  }
+
+  BackHandler = () => {
+    this.setState({
+      theCoin: null,
+      showCoin:false
+    })
+  }
 
   render() {
     const  {rerender} = this.state;
-    console.log(this.props, 'home')
+    // console.log(this.props, 'home')
+    console.log(this.state.showCoin)
     return (
       <div>
         <MuiThemeProvider>
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
-        <CurrencyCollection active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} activeUser={this.props.activeUser}/>
+        <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} activeUser={this.props.activeUser}/>
         {/*this.loginRender()*/}
-        {this.LoggedIn()}
+        {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} /> :null}
       </div>
     )
   }
