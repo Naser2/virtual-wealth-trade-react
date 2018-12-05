@@ -20,11 +20,10 @@ class Home extends Component {
     search:'',
     cryptos: [],
     rerender: []
-     //retrive in local
   }
 
   componentDidMount(){
-    axios.get(`http://localhost:3001/cryptos`)
+    axios.get(`http://localhost:3000/cryptos`)
       .then(res => this.setState({
         cryptos: res.data,
         rerender: res.data
@@ -46,10 +45,6 @@ class Home extends Component {
     })
   }
 
-// handleOnHomeCurrency = () => {
-//     console.log("hello Currencies")
-//   }
-
   signupForm = (obj) =>{
     this.setState({
       signup:true,
@@ -58,7 +53,7 @@ class Home extends Component {
   }
 
   signupHandler =(obj)=>{
-    axios.post(`http://localhost:3001/users`,{name:obj.name,username:obj.username,password:obj.password})
+    axios.post(`http://localhost:3000/users`,{name:obj.name,username:obj.username,password:obj.password})
     this.setState({
       signup:true
     })
@@ -72,7 +67,7 @@ class Home extends Component {
   }
 
   loginHandler = (obj) =>{
-    axios.get(`http://localhost:3001/users/${obj.username}`)
+    axios.get(`http://localhost:3000/users/${obj.username}`)
     .then(response => console.log(response.data))
   }
 
@@ -92,32 +87,22 @@ class Home extends Component {
       }
       else if(this.state.login===true){
         return <Form showName={false} name="" username="" password="" SubmitHandler={this.loginHandler}/>
-
       }
       else{
         //person is logged in, show search component,currencyContainer, etc.
       }
   }
 
-  LoggedIn = () => {
-
-  }
+  LoggedIn = () => {}
 
   render() {
-    // let comp;
-    // //console.log('checkkkkk', window.location);
-    // if (window.location.pathname === '/profile') {
-    //   comp = <CurrencyCollection cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} />
-    // } else {
-    //   comp = <Profile sele />
-    // }
-    // console.log('updated state', this.state.cryptos.data.currencies.data)
     const  {rerender} = this.state;
+    console.log(this.state)
     return (
       <div>
         <MuiThemeProvider>
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
-        <CurrencyCollection active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender.slice(0, 20)} />
+        <CurrencyCollection active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} />
         {/*this.loginRender()*/}
         {this.LoggedIn()}
       </div>

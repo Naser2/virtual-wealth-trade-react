@@ -30,10 +30,8 @@ componentDidMount = () => {
          Accepts: "application/json",
          Authorization: token
        }
-     })
-       .then(resp => resp.json())
+     }).then(resp => resp.json())
        .then(resp => {
-         console.log("CDMount", resp);
          this.setState({
            user: resp
          });
@@ -47,11 +45,10 @@ loginUser = (e,user) => {
   const {username, password} = user;
   // console.log('Login deatailsss', username, password)
   axios.post('http://localhost:3000/auth/login', {
-     username: username, password: password//can send this.state instead if preffered and know whats in state
+     username: username, password: password
   }).then(res => {
     localStorage.setItem('token', res.data.token);
     let current_user={user_id: res.data.user_id, username:res.data.username}
-
     // console.log('res from backend', this);
     this.setState({loggedIn:localStorage.getItem('token'),user:current_user})
     this.props.history.replace('/') //route props
@@ -74,7 +71,6 @@ handleSubmit = (e,user) =>{
         })
         // this.props.history.replace("/")
         }
-
   )
   .catch(err => alert("Blank field or user already created"))
 
@@ -98,7 +94,7 @@ return(
       <Route exact path="/currency" component={Currency} />
     </Fragment>
 
-)
-}
+    )
+  }
 }
 export default withRouter(Routes);
