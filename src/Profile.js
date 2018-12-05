@@ -19,6 +19,17 @@ class Profile extends Component {
 
   }
 
+
+  handleClick = (clickedCoin) => {
+   const assets = localStorage.getItem('assets' )
+   const { username } = this.props.activeUser;
+   const updatedAsset = assets[username].filter(coin => {
+     return  coin.id !== clickedCoin.id
+   })
+    console.log("Asked to delete thissss")
+  }
+
+
   componentDidMount() {
     if (this.props.loginUser === null) {
       this.props.history.replace('/')
@@ -128,7 +139,7 @@ class Profile extends Component {
     return (
       <div>
         {this.showEditOrProfile()}
-        {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} /> : null}
+        {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} handleClick={this.handleClick} /> : null}
         <ul id="list">
           <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.selected} activeUser={this.props.activeUser} profile={true} />
         </ul>

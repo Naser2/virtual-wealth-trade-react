@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 export default class CoinDetails extends Component {
 
+
+
+  
   render() {
     console.log(this.props.coin)
     const { coin } = this.props;
@@ -19,8 +22,9 @@ export default class CoinDetails extends Component {
               <span className="date">24hr Percent Change: {coin.quotes.USD.percent_change_24h}%</span>
             </div>
             <div className="description">
-              Nasser is an art director living in New York.
+              Nasser is an art director living in New York....
             </div>
+            <button onClick={() => this.props.handleClick(coin) }>Un-Wactch</button>
           </div>
         </div>
       </div>
