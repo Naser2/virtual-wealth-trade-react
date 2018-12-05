@@ -17,7 +17,7 @@ export default class CurrencyCollection extends Component {
     let dup = this.state.selectedCoins.find(c => c.id == coin.id)
     if(dup){
       let copyArray = [...this.state.selectedCoins].filter(theCoin => theCoin !== dup)
-      console.log(copyArray)
+      console.log('ytuytutytyh', copyArray)
       this.setState({
         selectedCoins: copyArray
       })
@@ -40,10 +40,24 @@ export default class CurrencyCollection extends Component {
       oldAssets =  JSON.parse(oldAssets);
       //if user already saved assets
       if(oldAssets[username]){ //if user has assets in localStorage
-        oldAssets[username] = [ //lets add the existing assets + the
-          ...oldAssets[username],
-          ...this.state.selectedCoins
-        ]
+
+        this.state.selectedCoins.forEach(c => {
+          console.log('ccccc', c, 'oldddddd', oldAssets[username])
+          if (oldAssets[username].find(a => {
+            console.log('ew Coinnn', c);
+            console.log('Old coinnn', a);
+            return a.id === c.id
+          })) {
+            console.log(`${c.name} this coin was already added`)  
+          } else {
+            console.log(`${c.name} This coin was not  added`)
+            oldAssets[username] = [ //lets add the existing assets + the 
+              ...oldAssets[username], 
+              c
+            ]
+          }     
+        });
+
       } else {
         oldAssets = { ...oldAssets, ...assets};
       }
@@ -51,28 +65,6 @@ export default class CurrencyCollection extends Component {
     } else {
       localStorage.setItem('assets', JSON.stringify(assets))
     }
-
-
-    // this.state.selectedCoins.forEach((c) => {
-    //   axios.post(`http://localhost:3000/assets`,
-    //   {
-    //     name: c.name,
-    //     price:c.price,
-    //     symbol:c.symbol,
-    //     website_slug:c.website_slug,
-    //     rank:c.rank,
-    //     circulating_supply:c.circulating_supply,
-    //     total_supply:c.total_supply,
-    //     max_supply:c.max_supply,
-    //     volume_24hp:c.volume_24hp,
-    //     market_cap: c.market_cap,
-    //     percent_change_1h:c.percent_change_1h,
-    //     percent_change_24h :c.percent_change_24h,
-    //     percent_change_7d :c.percent_change_7d,
-    //   })
-    // })
-
-
 
   }
 

@@ -50,7 +50,7 @@ componentDidMount() {
 loginUser = (e,user) => {
   e.preventDefault();
   const {username, password} = user;
-  axios.post('http://localhost:3000/auth/login', {
+  axios.post('http://localhost:3001/auth/login', {
      username: username, password: password
   }).then(res => {
     localStorage.setItem('token', res.data.token);
@@ -63,7 +63,7 @@ loginUser = (e,user) => {
 
 handleSubmit = (e,user) =>{
   e.preventDefault()
-  axios.post('http://localhost:3000/users',{
+  axios.post('http://localhost:3001/users',{
     name: user.name, username: user.username, password:user.password
   })
   .then(user =>{

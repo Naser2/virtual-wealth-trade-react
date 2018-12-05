@@ -20,13 +20,15 @@ class Profile extends Component {
   }
 
   componentDidMount(){
+    console.log(  ' username, assets', this.props);
     if (this.props.loginUser===null){
       this.props.history.replace('/')
-    }
-    if (this.props.activeUser !== null){
+    } else {
+    //if (this.props.activeUser !== null){
+         
       let assets = localStorage.getItem('assets');
       const { username } = this.props.activeUser;
-      console.log(username, assets,  'username, assets');
+      console.log( 'username, assets', username, assets);   
       if(assets) {
         assets = JSON.parse(assets);
         if(assets[username]) {
@@ -105,7 +107,7 @@ class Profile extends Component {
   }
 
   imageHandler = (obj) => {
-    console.log("image handler")
+    console.log("image handler", obj)
     this.setState({
       theCoin:obj,
       showCoin:true
@@ -120,7 +122,7 @@ class Profile extends Component {
   }
   render() {
 
-    //console.log('MY PROPSSS', this.props)
+    console.log('MY PROPSSS', this.props)
     console.log('MY STATE', this.state.selected)
     //console.log(this.props.loginUser, 'this.props.loginUser')
     return (
