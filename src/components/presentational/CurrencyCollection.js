@@ -12,10 +12,7 @@ export default class CurrencyCollection extends Component {
 
   handleCoinsChange = (event) => {
     const itemId = event.target.id
-    console.log("change event", event.target)
-    // console.log("change event item ID", itemId)
     const coin = this.props.cryptos.find(c => c.id == itemId);
-    console.log("change event coin", coin)
     let dup = this.state.selectedCoins.find(c => c.id == coin.id)
     if(dup){
       let copyArray = [...this.state.selectedCoins].filter(theCoin => theCoin !== dup)
@@ -29,33 +26,57 @@ export default class CurrencyCollection extends Component {
       })
     }
   }
+
   handleSubmit = (e) =>{
     e.preventDefault()
-    console.log("SUBMITTTINNNG ")
-    this.state.selectedCoins.forEach((c) => {
-      axios.post(`http://localhost:3000/assets`,
+    const { username } = this.props.activeUser;
 
-      { 
-        name: c.name,
-        price:c.price,
-        symbol:c.symbol,
-        website_slug:c.website_slug,
-        rank:c.rank,
-        circulating_supply:c.circulating_supply,
-        total_supply:c.total_supply,
-        max_supply:c.max_supply,
-        volume_24hp:c.volume_24hp,
-        market_cap: c.market_cap,
-        percent_change_1h:c.percent_change_1h,
-        percent_change_24h :c.percent_change_24h,
-        percent_change_7d :c.percent_change_7d,
-      }) 
-    })
+    // a new assest object holds the newly selected aseests for the current user
+    const assets = {
+      [username]: [...this.state.selectedCoins]
+    };
+    let oldAssets = localStorage.getItem('assets');
+    // if assest exists already
+    if(oldAssets) {
+      oldAssets =  JSON.parse(oldAssets);
+      //if user already saved assets
+      if(oldAssets[username]){ //if user has assets in localStorage
+        oldAssets[username] = [ //lets add the existing assets + the 
+          ...oldAssets[username], 
+          ...this.state.selectedCoins //newly selected that were just set in state 
+        ]
+      } else {
+        oldAssets = { ...oldAssets, ...assets}; // create new assest if the user doesn't already have
+      }
+      localStorage.setItem('assets', JSON.stringify(oldAssets)) //then strigify
+    } else {
+      localStorage.setItem('assets', JSON.stringify(assets)) 
+    }
+    
+
+    // this.state.selectedCoins.forEach((c) => {
+    //   axios.post(`http://localhost:3000/assets`,
+    //   { 
+    //     name: c.name,
+    //     price:c.price,
+    //     symbol:c.symbol,
+    //     website_slug:c.website_slug,
+    //     rank:c.rank,
+    //     circulating_supply:c.circulating_supply,
+    //     total_supply:c.total_supply,
+    //     max_supply:c.max_supply,
+    //     volume_24hp:c.volume_24hp,
+    //     market_cap: c.market_cap,
+    //     percent_change_1h:c.percent_change_1h,
+    //     percent_change_24h :c.percent_change_24h,
+    //     percent_change_7d :c.percent_change_7d,
+    //   }) 
+    // })
+   
 
 
   }
   render() {
-console.log("SELECTEDDD ",this.state)
    
     let { cryptos } = this.props
     

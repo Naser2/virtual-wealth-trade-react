@@ -11,14 +11,25 @@ class Profile extends Component {
     editted:false,
     delete: false,
     redirect:false,
+    selected:[]
   }
 
   componentDidMount(){
     if (this.props.loginUser===null){
       this.props.history.replace('/')
     }
-    if (this.props.loginUser !== null){
-      console.log("have a user")
+    if (this.props.activeUser !== null){
+      let assets = localStorage.getItem('assets');
+      const { username } = this.props.activeUser;
+      console.log(username, assets,  'username, assets');
+      if(assets) {
+        assets = JSON.parse(assets);
+        if(assets[username]) {
+          this.setState({
+            selected: assets[username],
+          })
+        }
+      }
     }
   }
 
@@ -88,12 +99,21 @@ class Profile extends Component {
     }
   }
   render() {
-    console.log('sdsadada', this.props)
+
+    //console.log('MY PROPSSS', this.props)
+    console.log('MY STATE', this.state.selected)
+    //console.log(this.props.loginUser, 'this.props.loginUser')
     return (
       <div>
      Hello
       {this.showEditOrProfile()}
-     hello Profile
+      <ul id="list">
+        { 
+          this.state.selected.map(asset => (
+            <li>{asset.name}</li>
+          ))
+        }
+      </ul>
     </div>
     )
   }

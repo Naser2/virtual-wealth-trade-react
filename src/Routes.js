@@ -7,7 +7,8 @@ import Currency from './components/presentational/Currency';
 import NoMatch from './NoMatch';
 import NavBar from './NavBar'
 import SignupForm from './SignupForm'
-import axios from 'axios'
+import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 
 
@@ -19,23 +20,29 @@ state={
   loggedIn: localStorage.getItem('token')
 }
 
-componentDidMount = () => {
+componentDidMount() {
+    console.log('ROUTES')
    let token = localStorage.getItem("token");
-   console.log(token)
+   console.log(token, 'TOKEN')
    
    if (token) {
-     fetch("http://localhost:3000/auth/current_user", {
-       headers: {
-         "Content-Type": "application/json",
-         Accepts: "application/json",
-         Authorization: token
-       }
-     }).then(resp => resp.json())
-       .then(resp => {
-         this.setState({
-           user: resp
-         });
-       });
+    const res = jwt.decode(token);
+    this.setState({
+      user: res.data
+    })
+    //  fetch("http://localhost:3000/auth/current_user", {
+    //    headers: {
+    //      "Content-Type": "application/json",
+    //      Accepts: "application/json",
+    //      Authorization: token
+    //    }
+    //  }).then(resp => resp.json())
+    //    .then(resp => {
+    //      console.log(resp, 'api call')
+    //      this.setState({
+    //        user: resp
+    //      });
+    //    });
    } else {
      this.props.history.push("/signup");
    }
@@ -43,7 +50,6 @@ componentDidMount = () => {
 loginUser = (e,user) => {
   e.preventDefault();
   const {username, password} = user;
-  // console.log('Login deatailsss', username, password)
   axios.post('http://localhost:3000/auth/login', {
      username: username, password: password
   }).then(res => {
@@ -82,15 +88,18 @@ logOut = () =>{
   })
 }
 render(){
-  console.log(this.state)
+console.log('YOOOOOO RENDERED ROUTES Brooo')
 return(
 
     <Fragment>
      <NavBar logOut={this.logOut}/>
-      <Route exact path="/" render= {() => <Home active={this.state.loggedIn}/>} />
+    
+      <Route exact path="/" render= {() => <Home active={this.state.loggedIn} activeUser={this.state.user} />}/>
+      <Route exact path="/Profile" render={()=><Profile activeUser={this.state.user}/>}/>
+      
       <Route exact path="/signupForm" render= {() => <SignupForm handleSubmit={this.handleSubmit} />} />
       <Route exact path="/login" render={() => <Login loginUser={this.loginUser}/>} />
-      <Route exact path="/Profile" render={()=><Profile loginUser={this.state.user}/>}/>
+      
       <Route exact path="/currency" component={Currency} />
     </Fragment>
 

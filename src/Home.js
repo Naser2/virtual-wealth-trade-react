@@ -97,12 +97,12 @@ class Home extends Component {
 
   render() {
     const  {rerender} = this.state;
-    console.log(this.state)
+    console.log(this.props, 'home')
     return (
       <div>
         <MuiThemeProvider>
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
-        <CurrencyCollection active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} />
+        <CurrencyCollection active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} activeUser={this.props.activeUser}/>
         {/*this.loginRender()*/}
         {this.LoggedIn()}
       </div>
