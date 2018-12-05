@@ -23,10 +23,16 @@ class Profile extends Component {
   handleClick = (clickedCoin) => {
    const assets = localStorage.getItem('assets' )
    const { username } = this.props.activeUser;
-   const updatedAsset = assets[username].filter(coin => {
-     return  coin.id !== clickedCoin.id
-   })
-    console.log("Asked to delete thissss")
+    console.log( username, 'fdffsfs', assets,  "USERR:", assets[username] )
+   if (assets[username]) {
+    const updatedAsset = assets[username].filter(coin => {
+      return  coin.id !== clickedCoin.id
+    })
+     console.log("Asked to delete thissss", updatedAsset)
+   } else {
+     console.log('DID NOT FIND USER')
+   }
+ 
   }
 
 
