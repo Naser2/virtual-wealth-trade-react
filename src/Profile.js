@@ -21,9 +21,9 @@ class Profile extends Component {
 
 
   handleClick = (clickedCoin) => {
-   const assets = localStorage.getItem('assets' )
+   const assets = JSON.parse(localStorage.getItem('assets' ))
    const { username } = this.props.activeUser;
-    console.log( username, 'fdffsfs', assets,  "USERR:", assets[username] )
+    console.log( username, 'fdffsafs', assets,  "USERR:", assets[username] )
    if (assets[username]) {
     const updatedAsset = assets[username].filter(coin => {
       return  coin.id !== clickedCoin.id

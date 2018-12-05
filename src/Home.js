@@ -120,7 +120,7 @@ class Home extends Component {
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
         <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} activeUser={this.props.activeUser}/>
         {/*this.loginRender()*/}
-        {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} /> :null}
+        {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} activeUser={this.props.activeUser}/> :null}
       </div>
     )
   }
