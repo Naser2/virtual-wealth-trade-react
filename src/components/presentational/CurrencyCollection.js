@@ -31,24 +31,22 @@ export default class CurrencyCollection extends Component {
     e.preventDefault()
     const { username } = this.props.activeUser;
 
-    // a new assest object holds the newly selected aseests for the current user
     const assets = {
       [username]: [...this.state.selectedCoins]
     };
     let oldAssets = localStorage.getItem('assets');
-    // if assest exists already
     if(oldAssets) {
       oldAssets =  JSON.parse(oldAssets);
       //if user already saved assets
       if(oldAssets[username]){ //if user has assets in localStorage
         oldAssets[username] = [ //lets add the existing assets + the 
           ...oldAssets[username], 
-          ...this.state.selectedCoins //newly selected that were just set in state 
+          ...this.state.selectedCoins
         ]
       } else {
-        oldAssets = { ...oldAssets, ...assets}; // create new assest if the user doesn't already have
+        oldAssets = { ...oldAssets, ...assets}; 
       }
-      localStorage.setItem('assets', JSON.stringify(oldAssets)) //then strigify
+      localStorage.setItem('assets', JSON.stringify(oldAssets))  //stringify
     } else {
       localStorage.setItem('assets', JSON.stringify(assets)) 
     }
