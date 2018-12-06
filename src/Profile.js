@@ -63,9 +63,12 @@ class Profile extends Component {
   }
 
   deleteHandler = () => {
-    this.setState({
-      delete: true
-    })
+    const isConfirmed = window.confirm('Are you sure you want to delete your account?')
+    if(isConfirmed) {
+      this.setState({
+        delete: true
+      })
+    }
   }
 
   patchOrPost = (obj) => {
@@ -139,17 +142,21 @@ class Profile extends Component {
     })
   }
   render() {
-
-    //console.log('MY PROPSSS', this.props)
-    console.log('MY PROPS', this.props.oldActive)
-    //console.log(this.props.loginUser, 'this.props.loginUser')
     return (
       <div>
-        {this.showEditOrProfile()}
+        <div className="ui raised container segment">
+          <h1 className="ui block header">Edit Profile</h1>
+          <Form showName={true} name="Nasser" username="Nas" password="" SubmitHandler={this.patchOrPost} />
+        </div>
         {this.state.theCoin !== null ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} handleClick={this.handleClick} /> : null}
-        <ul id="list">
-          <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.selected} activeUser={this.props.activeUser} profile={true} />
-        </ul>
+        <CurrencyCollection 
+          imageHandler={this.imageHandler} 
+          active={this.props.active ? true : false} 
+          cryptos={this.state.selected} 
+          activeUser={this.props.activeUser} 
+          profile={true} 
+        />
+        <button onClick={this.deleteHandler}>Delete Profile</button>
       </div>
     )
   }

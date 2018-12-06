@@ -53,7 +53,13 @@ class Routes extends React.Component {
     axios.post('http://localhost:3001/auth/login', {
       username: username, password: password
     }).then(res => {
+<<<<<<< HEAD
       localStorage.setItem('token', res.data.token);
+=======
+      console.log(res.data, 'res.data')
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('auth', JSON.stringify(res.data));
+>>>>>>> commit
       let current_user = { user_id: res.data.user_id, username: res.data.username }
       // console.log('res from backend', this);
       this.setState({ loggedIn: localStorage.getItem('token'), user: current_user })
@@ -79,14 +85,21 @@ class Routes extends React.Component {
       }
       )
       .catch(err => alert("Blank field or user already created"))
+<<<<<<< HEAD
 
   }
 
+=======
+
+  }
+
+>>>>>>> commit
   logOut = () => {
     this.setState({
       loggedIn: null
     })
   }
+<<<<<<< HEAD
   render() {
     let token = localStorage.getItem("token");
     let activeUser = null;
@@ -96,13 +109,21 @@ class Routes extends React.Component {
     }
     
     
+=======
+
+  render() {
+>>>>>>> commit
     return (
 
       <Fragment>
         <NavBar logOut={this.logOut} />
 
         <Route exact path="/" render={() => <Home active={this.state.loggedIn} activeUser={this.state.user} />} />
+<<<<<<< HEAD
         <Route exact path="/Profile" render={() => <Profile activeUser={activeUser} oldActive={this.state.user} />} />
+=======
+        <Route exact path="/Profile" render={() => <Profile activeUser={this.state.user} />} />
+>>>>>>> commit
 
         <Route exact path="/signupForm" render={() => <SignupForm handleSubmit={this.handleSubmit} />} />
         <Route exact path="/login" render={() => <Login loginUser={this.loginUser} />} />

@@ -23,6 +23,7 @@ export default class NavBar extends Component {
 
   handleToken = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('auth')
     this.props.logOut()
   }
    showLogOutAndHandleToken = () => {
