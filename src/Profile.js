@@ -72,12 +72,15 @@ class Profile extends Component {
   }
 
   patchOrPost = (obj) => {
-    axios.patch(`http://localhost:3001/users/${obj.id}`, { name: obj.name, username: obj.username, password: obj.password })
+    const isConfirmed = window.confirm('Are you sure?');
+    if(isConfirmed) {
+      axios.patch(`http://localhost:3001/users/${obj.id}`, { name: obj.name, username: obj.username, password: obj.password })
       .then(response => this.setState({
         editted: true,
         edit: false
-      })
-      )
+      }))
+    }
+    
   }
 
   YesHandler = () => {
@@ -142,11 +145,12 @@ class Profile extends Component {
     })
   }
   render() {
+    const { username } = this.props.auth;
     return (
       <div>
         <div className="ui raised container segment">
           <h1 className="ui block header">Edit Profile</h1>
-          <Form showName={true} name="Nasser" username="Nas" password="" SubmitHandler={this.patchOrPost} />
+          <Form showName={true} name="Nasser" username={username} password="" SubmitHandler={this.patchOrPost} />
         </div>
         {this.state.theCoin !== null ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} handleClick={this.handleClick} /> : null}
         <CurrencyCollection 
