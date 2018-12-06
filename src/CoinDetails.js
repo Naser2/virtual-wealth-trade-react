@@ -17,12 +17,12 @@ export default class CoinDetails extends Component {
           <div className="content">
             <a className="header">{coin.name}</a>
             <div className="meta">
-              <span className="date">Price: ${coin.quotes.USD.price}</span> <br />
-              <span className="date">Market Cap: ${coin.quotes.USD.market_cap}</span> <br />
-              <span className="date">24hr Percent Change: {coin.quotes.USD.percent_change_24h}%</span>
+              <span className="date">Price: <a>${coin.quotes.USD.price}</a></span> <br />
+              <span className="date">Market Cap: $<a>{coin.quotes.USD.market_cap}</a></span> <br />
+              <span className="date">24hr Percent Change:<a>{coin.quotes.USD.percent_change_24h}%</a></span>
             </div>
             <div className="description">
-              Nasser is an art director living in New York....
+              <stron>Lastest Update</stron>
             </div>
             <button onClick={() => this.props.handleClick(coin) }>Un-Wactch</button>
           </div>
