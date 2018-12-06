@@ -141,7 +141,7 @@ class Profile extends Component {
   render() {
 
     //console.log('MY PROPSSS', this.props)
-    console.log('MY STATE', this.state.selected)
+    console.log('MY PROPS', this.props.oldActive)
     //console.log(this.props.loginUser, 'this.props.loginUser')
     return (
       <div>
