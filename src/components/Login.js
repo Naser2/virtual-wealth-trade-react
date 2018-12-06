@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// import PropTypes from 'prop-types'
 
 export default class LogIn extends Component {
   state = {
@@ -17,19 +18,26 @@ export default class LogIn extends Component {
 
   render() {
     return (
-          <div>
-            <form onSubmit={(e) => this.props.loginUser(e,this.state)}>
-              <div>
-                <input type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
-                <label htmlFor="username">Username</label>
-              </div>
-              <div>
-                <input type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
-                <label htmlFor="password">Password</label>
-              </div>
-              <input type="submit" value="Login" />
-            </form>
-          </div>
+
+  <div class="ui grid container middle aligned" >
+    <div class="column">
+
+      <form class="ui form segment top attached green" onSubmit={(e) => this.props.loginUser(e,this.state)}>
+        <div class="field ui left icon input fluid">
+          <input type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
+          <i class="users icon"></i>
+        </div>
+        <div class="field ui left icon input fluid">
+          <input type="text" name="password" placeholder="Password" onChange={this.handleChange}/>  
+          <i class="key icon"></i>
+        </div>
+        <button class="ui button fluid positive" type="submit" value="Login"style={{background: '#0084cc'}} >Submit</button>
+      </form>  
+      <div class="ui segment bottom attached">Not registered? <a >Sign up here</a>.</div>
+    </div>
+  </div>
+
+        
        )
       }
     }
