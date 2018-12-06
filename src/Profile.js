@@ -15,17 +15,24 @@ class Profile extends Component {
     redirect: false,
     selected: [],
     theCoin: null,
-    showCoin: false
+    //showCoin: false
 
   }
 
 
   handleClick = (clickedCoin) => {
-   const assets = localStorage.getItem('assets' )
+   let assets = localStorage.getItem('assets');
+   assets = JSON.parse(assets);
    const { username } = this.props.activeUser;
-   const updatedAsset = assets[username].filter(coin => {
-     return  coin.id !== clickedCoin.id
+   console.log(username, 'user')
+   assets[username] = assets[username].filter(coin => {
+     return coin.id !== clickedCoin.id
    })
+   localStorage.setItem('assets', JSON.stringify(assets));
+  this.setState({
+    selected: assets[username],
+    theCoin: null,
+  });
     console.log("Asked to delete thissss")
   }
 
@@ -134,12 +141,12 @@ class Profile extends Component {
   render() {
 
     //console.log('MY PROPSSS', this.props)
-    console.log('MY STATE', this.state.selected)
+    console.log('MY PROPS', this.props.oldActive)
     //console.log(this.props.loginUser, 'this.props.loginUser')
     return (
       <div>
         {this.showEditOrProfile()}
-        {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} handleClick={this.handleClick} /> : null}
+        {this.state.theCoin !== null ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} handleClick={this.handleClick} /> : null}
         <ul id="list">
           <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.selected} activeUser={this.props.activeUser} profile={true} />
         </ul>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import Profile from './Profile'
     // can use redirect
     // activeClassName: https://reacttraining.com/react-router/web/api/NavLink
 
@@ -29,7 +30,7 @@ export default class NavBar extends Component {
               <NavLink exact style={{width: '100px',
                 padding: '12px',
                 margin: '0 6px 6px',
-                background: 'blue',
+                background: 'gray',
                 borderRadius: '5px',
                 textDecoration: 'none',
                 color: 'white'}} activeStyle={{background: 'gray'}} onClick={this.handleToken} to="/">Logout</NavLink>
@@ -57,7 +58,7 @@ export default class NavBar extends Component {
                 margin: '0',
                 borderRadius: '5px',
                 background: '#ADD8E6',
-                color: 'white'}} activeStyle={{background: '#0084cc'}}  >Profile</NavLink>
+                color: 'white'}} activeStyle={{background: '#0084cc'}}  >Profile</NavLink> //place edit/delete in a container name && link to setting 
                 }
         </div>
         <div className="item">
@@ -76,7 +77,7 @@ export default class NavBar extends Component {
                 width: '100px',
                 padding: '12px',
                 margin: '0',
-                background: '#ADD8E6',
+                background: '#32cd32',
                 borderRadius: '5px',
                 textDecoration: 'none',
                 color: 'white'}} activeStyle={{background: '#0084cc'}} >Sign up</NavLink>
@@ -84,7 +85,7 @@ export default class NavBar extends Component {
         </div>
         <div className="right item">
         {this.checkToken() ? this.showLogOutAndHandleToken()
-          : console.log('redirect me to Login') }
+          : console.log('Please Login') }
         </div>
 
 

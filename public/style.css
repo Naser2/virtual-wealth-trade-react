@@ -1,0 +1,25 @@
+body {
+  font-family: 'Open Sans';
+  background: url('https://subtlepatterns.com/patterns/halftone.png')
+}
+/* 
+#background {
+  /* background-image: url("./bc.jpeg"); */
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: -10;
+}
+
+#background-overlay {
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -5;
+}  */
