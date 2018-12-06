@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import SignupForm from './SignupForm'
 import CoinDetails from './CoinDetails'
 
+
 import CurrencyCollection from './components/presentational/CurrencyCollection'
 import Profile from './Profile';
 
@@ -111,12 +112,14 @@ class Home extends Component {
   }
 
   render() {
+   
     const  {rerender} = this.state;
     // console.log(this.props, 'home')
     console.log(this.state.showCoin)
     return (
-      <div>
+      <div >
         <MuiThemeProvider>
+        
         <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
         <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} activeUser={this.props.activeUser}/>
         {/*this.loginRender()*/}
