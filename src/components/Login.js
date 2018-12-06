@@ -21,8 +21,9 @@ export default class LogIn extends Component {
 
   <div class="ui grid container middle aligned" >
     <div class="column">
-
+    <div className="ui segment top attached"> Login</div>
       <form class="ui form segment top attached green" onSubmit={(e) => this.props.loginUser(e,this.state)}>
+      
         <div class="field ui left icon input fluid">
           <input type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
           <i class="users icon"></i>
