@@ -30,6 +30,7 @@ export default class NavBar extends Component {
                 padding: '12px',
                 margin: '0 6px 6px',
                 background: 'blue',
+                borderRadius: '5px',
                 textDecoration: 'none',
                 color: 'white'}} activeStyle={{background: 'gray'}} onClick={this.handleToken} to="/">Logout</NavLink>
            </div>)
@@ -45,6 +46,7 @@ export default class NavBar extends Component {
                 padding: '12px',
                 width: '100px',
                 margin: '0',
+                borderRadius: '5px',
                 background: '#ADD8E6',
                 color: 'white'}} activeStyle={{background: '#0084cc'}} >Home</NavLink>
         </div>
@@ -53,6 +55,7 @@ export default class NavBar extends Component {
                 width: '100px',
                 padding: '12px',
                 margin: '0',
+                borderRadius: '5px',
                 background: '#ADD8E6',
                 color: 'white'}} activeStyle={{background: '#0084cc'}}  >Profile</NavLink>
                 }
@@ -63,6 +66,7 @@ export default class NavBar extends Component {
                 padding: '12px',
                 margin: '0',
                 background: '#ADD8E6',
+                borderRadius: '5px',
                 textDecoration: 'none',
                 color: 'white'}} activeStyle={{background: '#0084cc'}} >Login</NavLink>
         }
@@ -73,6 +77,7 @@ export default class NavBar extends Component {
                 padding: '12px',
                 margin: '0',
                 background: '#ADD8E6',
+                borderRadius: '5px',
                 textDecoration: 'none',
                 color: 'white'}} activeStyle={{background: '#0084cc'}} >Sign up</NavLink>
         }
