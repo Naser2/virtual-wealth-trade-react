@@ -5,7 +5,8 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div>
-          <input name="searchInput" value={this.props.searchData} onChange={this.props.getSearchedCurrencies} 
+          <input name="searchInput" value={this.props.searchData} onChange={this.props.getSearchedCurrencies}
+          placeholder="Search..."
           style={{
             margin: '0 auto',
             maxWidth: '800',
@@ -13,11 +14,13 @@ export default class SearchBar extends Component {
             width: '100',
             position: 'relative ' ,
             height: '40px',
-            border:' 1px solid #00B4CC',
+            border:' 2.5px solid #00B4CC',
             background: '#white',
             borderRadius: '3px',
             cursor: 'pointer',
-            fontSize: '30px'
+            fontSize: '30px',
+            padding: '26px',
+            borderRadius: '30px',
       }}/> <br />
       </div>
     )
