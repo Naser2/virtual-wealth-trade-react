@@ -138,68 +138,95 @@ class Home extends Component {
     const { rerender } = this.state;
     // console.log(this.props, 'home')
     console.log(this.state.showCoin);
+    console.log("Checking Props: ",  this.props.active);
     return (
-      <div>
+
+       <div className="multithemeWrapper">
         <MuiThemeProvider>
-          <>
-            <section className="jsx-1013649062 marketingSection">
-              <h3 className="hold_divs landing-title">
-                Get the best coins out there.
-              </h3>
-              <p className="jsx-1013649062 landing-tagline">
-                Stop wasting time tracking individual coins and take away the
-                element of surprise by having the best platform to do it. It
-                gives you an instant relief as you track the coins fluctuation.
-                Learn, and build wealth all in one place.
-              </p>
-              <div style={{ marginTop: '2em' }} className="button_div">
-                <div
-                  className="signup-button"
-                  Link="/signup"
-                  onClick={this.redirectToSignUp}
-                >
-                  Sign up
-                </div>{' '}
-                <div
-                  className="login-button"
-                  href="/login"
-                  onClick={this.redirectToLogIn}
-                >
-                  Login
+            <>
+              <section className="jsx-1013649062 marketingSection">
+                { 
+                  
+                  this.props.active? 
+
+
+                ( 
+                  <>
+                    <h3 className="hold_divs landing-title">
+                      Get the best coins out there.
+                    </h3>
+                  </>
+                  )
+                :
+              
+                  (<>
+                    
+                    <p className="jsx-1013649062 landing-tagline">
+                    Stop wasting time tracking individual coins and take away the
+                    element of surprise by having the best platform to do it. It
+                    gives you an instant relief as you track the coins fluctuation.
+                    Learn, and build wealth all in one place.
+                  </p>
+                  
+                      <div style={{ marginTop: '2em' }} className="button_div">
+                        <div
+                          className="signup-button"
+                          Link="/signup"
+                          onClick={this.redirectToSignUp}
+                        >
+                          Sign up
+                        </div>{' '}
+                        <div
+                          className="login-button"
+                          href="/login"
+                          onClick={this.redirectToLogIn}
+                        >
+                          Login
+                        </div>
+                      </div>
+                  
+                <div className="landing-btc">
+                  <img
+                    alt="#!"
+                    src="./bc.jpeg"
+                    className="btc"
+                    syle={{ width: '40px' }}
+                  />
                 </div>
-              </div>
-              <div className="landing-btc">
-                <img
-                  alt="#!"
-                  src="./bc.jpeg"
-                  className="btc"
-                  syle={{ width: '40px' }}
-                />
-              </div>
-            </section>
-            <h1 className="ui block header w-o-Border">
-              Top 20 Currencies and More
-            </h1>{' '}
-          </>
-          <Search
-            searchData={this.state.search}
-            getSearchedCurrencies={this.getSearchedCurrencies}
-          />{' '}
+                </>
+                )
+              }
+              </section>
+            </>
+          
+              <h1 className="ui block header w-o-Border">
+                Top 20 Currencies and More
+              </h1>{' '}
+            <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/>{' '}
         </MuiThemeProvider>
+
+      <div className="insideMultithemeWrapper">
         <CurrencyCollection
           imageHandler={this.imageHandler}
           active={this.props.active ? true : false}
           cryptos={this.state.loggedIn ? rerender : rerender}
           activeUser={this.props.activeUser}
         />
-        {/*this.loginRender()*/}
-        {this.state.showCoin ? (
-          <CoinDetails
-            BackHandler={this.BackHandler}
-            coin={this.state.theCoin}
-          />
-        ) : null}
+        {/* {this.loginRender()} */}
+           
+       
+          {this.state.showCoin ?
+           (<CoinDetails
+              BackHandler={this.BackHandler}
+              coin={this.state.theCoin}
+            /> ) 
+            : 
+           (null)
+          }
+        </div>
+
       </div>
+ 
     );
   }
 }
