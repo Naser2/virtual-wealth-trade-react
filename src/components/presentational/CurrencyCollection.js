@@ -89,7 +89,7 @@ export default class CurrencyCollection extends Component {
   verifySaveBtnOption = () => {
     if (this.props.profile) {
       return null;
-    } else if (!this.props.profile && !this.props.loggedIn) {
+    } else if (!this.props.profile && !this.props.activeUser) {
       return (
         <button
           className="ui blue big button button_ele"
@@ -127,7 +127,7 @@ export default class CurrencyCollection extends Component {
     return (
       <div className="ui raised container segment">
         {this.props.profile ? (
-          <h1 className="ui block header">Your Currencies</h1>
+          <h1 className="ui block header profile">Your Currencies</h1>
         ) : (
           <>
             {/* <>
