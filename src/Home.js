@@ -7,7 +7,7 @@ import { AutoComplete } from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SignupForm from './SignupForm';
 import CoinDetails from './CoinDetails';
-
+import { NavLink, Link } from 'react-router-dom';
 import CurrencyCollection from './components/presentational/CurrencyCollection';
 import Profile from './Profile';
 
@@ -128,7 +128,12 @@ class Home extends Component {
       showCoin: false
     });
   };
-
+  redirectToSignUp = () => {
+    window.location.assign('/signupForm');
+  };
+  redirectToLogIn = () => {
+    window.location.assign('/login');
+  };
   render() {
     const { rerender } = this.state;
     // console.log(this.props, 'home')
@@ -148,12 +153,28 @@ class Home extends Component {
                 Learn, and build wealth all in one place.
               </p>
               <div style={{ marginTop: '2em' }} className="button_div">
-                <div className="signup-button" href="/signup">
+                <div
+                  className="signup-button"
+                  Link="/signup"
+                  onClick={this.redirectToSignUp}
+                >
                   Sign up
+                </div>{' '}
+                <div
+                  className="login-button"
+                  href="/login"
+                  onClick={this.redirectToLogIn}
+                >
+                  Login
                 </div>
               </div>
               <div className="landing-btc">
-                <img src="./bc.jpeg" className="btc" syle={{ width: '40px' }} />
+                <img
+                  alt="#!"
+                  src="./bc.jpeg"
+                  className="btc"
+                  syle={{ width: '40px' }}
+                />
               </div>
             </section>
             <h1 className="ui block header w-o-Border">
