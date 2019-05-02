@@ -14,7 +14,10 @@ export default class NavBar extends Component {
   };
 
   navBarFunc = () => {
-    if (this.state.token) {
+    if (this.checkToken()) {
+      this.showLogOutAndHandleToken();
+    } 
+    if (this.props.token) {
       return (
         <>
           <div
@@ -60,6 +63,7 @@ export default class NavBar extends Component {
               ) //place edit/delete in a container name && link to setting
               }
             </div>
+
             <div className="item">
               {!this.checkToken() && (
                 <NavLink
@@ -98,18 +102,35 @@ export default class NavBar extends Component {
                 </NavLink>
               )}
             </div>
-            <div className="right item" />
+            
+            {
+              this.props.token ? <div className="right item">
+              <NavLink
+                exact
+                style={{
+                  width: '100px',
+                  padding: '12px',
+                  margin: '0 6px 6px',
+                  background: 'gray',
+                  borderRadius: '5px',
+                  textDecoration: 'none',
+                  color: 'white'
+                }}
+                activeStyle={{ background: 'gray' }}
+                onClick={this.handleToken}
+                to="/"
+              >
+                Logout
+              </NavLink>
+            </div>:
+            null
+            }
+            
           </div>
         </>
       );
     } else {
       return null;
-    }
-
-    if (this.checkToken()) {
-      this.showLogOutAndHandleToken();
-    } else {
-      alert('please Login');
     }
   };
 
@@ -155,17 +176,29 @@ export default class NavBar extends Component {
     let token = localStorage.getItem('token');
     //console.log(token, 'TOKEN')
 
-    if (token) {
-      const res = jwt.decode(token);
+    if (this.props.token) {
+      // const res = jwt.decode(token);
       this.setState({
-        token: res.data
+        token: this.props.token
       });
     }
+   
   }
   render() {
+
+    console.log("Active : ", this.props.token, 
+     " User Props: ", this.props.user, 
+      "checkToken: ", this.props.checkToken )
+
     return (
-      <>
+      <>{
+        this.props.token ?  
+        <>
         {this.navBarFunc()}
+        </>
+      :
+      null
+      }
         {/* {this.state.token ? (
           <div className="ui menu">
             <div className="item">
