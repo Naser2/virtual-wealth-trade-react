@@ -26,19 +26,6 @@ class Routes extends React.Component {
       this.setState({
         user: res.data
       });
-      //  fetch("http://localhost:3000/auth/current_user", {
-      //    headers: {
-      //      "Content-Type": "application/json",
-      //      Accepts: "application/json",
-      //      Authorization: token
-      //    }
-      //  }).then(resp => resp.json())
-      //    .then(resp => {
-      //      console.log(resp, 'api call')
-      //      this.setState({
-      //        user: resp
-      //      });
-      //    });
     } 
   }
   loginUser = (e, user) => {
@@ -109,7 +96,7 @@ class Routes extends React.Component {
 
     return (
       <Fragment>
-        <NavBar logOut={this.logOut} />
+        <NavBar logOut={this.logOut} token={this.state.loggedIn} user={this.state.user}/>
 
         <Route
           exact
@@ -134,8 +121,10 @@ class Routes extends React.Component {
           path="/login"
           render={() => <Login loginUser={this.loginUser} />}
         />
-
+         {/* <Route exact path="!#" 
+         render={() => <NavBar token={this.state.loggedIn} user={this.state.user}/>} /> */}
         <Route exact path="/currency" component={Currency} />
+        
       </Fragment>
     );
   }
