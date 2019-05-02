@@ -50,9 +50,15 @@ body {
 
 .ui.block.header.title {
   background-color: #31444c !important;
-  border-color: solid 1px #ffcd0b !important;
+  border: 0.5px solid #ffcd0b !important;
   display: inline-block;
 }
+
+.ui.block.header.profile {
+  color: #ffcd0b !important;
+  border: 0.5px solid #ffcd0b !important;
+}
+
 #background-overlay {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
@@ -116,6 +122,19 @@ body {
   margin-top: 5em;
 }
 
+.landing-title {
+  margin-top: 30px !important;
+  font-size: 45px;
+  font-family: Lato;
+  font-weight: 400;
+}
+.hold_divs {
+  /* margin-top: 40px; */
+  font-size: 45px;
+  font-family: Lato;
+  font-weight: 400;
+}
+
 .ui.blue.big.button.button_ele {
   min-width: 200px;
   border: solid 2px #ffcd0b;
@@ -150,6 +169,7 @@ body {
   cursor: pointer;
   -webkit-transition: background 0.2s;
   transition: background 0.2s;
+  margin-bottom: 10px;
 }
 .login-button {
   display: inline-block;
@@ -162,6 +182,7 @@ body {
   cursor: pointer;
   -webkit-transition: background 0.2s;
   transition: background 0.2s;
+  margin-bottom: 10px;
 }
 
 .marketingSection {
