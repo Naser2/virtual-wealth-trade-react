@@ -118,7 +118,7 @@ class Profile extends Component {
       return (<div>
         {this.state.editted ? <p>Edit Saved</p> : null}
         <p>Options</p>
-        <table className="TableName">
+        <table className="editProfile">
           <tbody>
             <tr className="options" onClick={this.editHandler}>Edit</tr>
             <tr className="options" onClick={this.deleteHandler}>Delete</tr>
