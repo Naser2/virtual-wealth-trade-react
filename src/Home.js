@@ -2,130 +2,184 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Form from './components/containers/Form';
 import Search from './SearchBar';
-import {SearchBar } from 'material-ui-search-bar';
+import { SearchBar } from 'material-ui-search-bar';
 import { AutoComplete } from 'material-ui/AutoComplete';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import SignupForm from './SignupForm'
-import CoinDetails from './CoinDetails'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SignupForm from './SignupForm';
+import CoinDetails from './CoinDetails';
 
-
-import CurrencyCollection from './components/presentational/CurrencyCollection'
+import CurrencyCollection from './components/presentational/CurrencyCollection';
 import Profile from './Profile';
 
-
 class Home extends Component {
-  state={
-    initial:true,
-    signup:false,
-    login:false,
-    search:'',
+  state = {
+    initial: true,
+    signup: false,
+    login: false,
+    search: '',
     cryptos: [],
     rerender: [],
-    theCoin:null,
-    showCoin:false
-  }
+    theCoin: null,
+    showCoin: false
+  };
 
-  componentDidMount(){
-    axios.get(`http://localhost:3001/cryptos`)
-      .then(res => this.setState({
+  componentDidMount() {
+    axios.get(`http://localhost:3001/cryptos`).then(res =>
+      this.setState({
         cryptos: res.data,
         rerender: res.data
       })
-    )
+    );
   }
 
-  getSearchedCurrencies = (e) => {
-    console.log('searchdata', e.target.value)
+  getSearchedCurrencies = e => {
+    console.log('searchdata', e.target.value);
+    this.setState(
+      {
+        search: e.target.value
+      },
+      () => {
+        const regex = new RegExp(this.state.search, 'i');
+        const filteredCurrencies = this.state.cryptos.filter(crypto =>
+          regex.test(crypto.name)
+        );
+        this.setState({
+          rerender: filteredCurrencies
+        });
+      }
+    );
+  };
+
+  signupForm = obj => {
     this.setState({
-      search: e.target.value
-    }, () => {
+      signup: true,
+      initial: false
+    });
+  };
 
-      const regex = new RegExp(this.state.search, "i");
-      const filteredCurrencies = this.state.cryptos.filter(crypto => regex.test(crypto.name));
-      this.setState({
-        rerender: filteredCurrencies
-      })
-    })
-  }
-
-  signupForm = (obj) =>{
+  signupHandler = obj => {
+    axios.post(`http://localhost:3001/users`, {
+      name: obj.name,
+      username: obj.username,
+      password: obj.password
+    });
     this.setState({
-      signup:true,
-      initial:false
-    })
-  }
+      signup: true
+    });
+  };
 
-  signupHandler =(obj)=>{
-    axios.post(`http://localhost:3001/users`,{name:obj.name,username:obj.username,password:obj.password})
+  loginForm = () => {
     this.setState({
-      signup:true
-    })
-  }
+      login: true,
+      initial: false
+    });
+  };
 
-  loginForm = () =>{
-    this.setState({
-      login:true,
-      initial:false
-    })
-  }
-
-  loginHandler = (obj) =>{
-    axios.get(`http://localhost:3001/users/${obj.username}`)
-    .then(response => console.log(response.data))
-  }
+  loginHandler = obj => {
+    axios
+      .get(`http://localhost:3001/users/${obj.username}`)
+      .then(response => console.log(response.data));
+  };
 
   loginRender = () => {
-
-    if (this.state.initial===true){
-      return(
+    if (this.state.initial === true) {
+      return (
         <div>
-        <button onClick={this.signupForm}>Sign Up</button>
-        <button onClick={this.loginForm}>Login</button>
+          <button onClick={this.signupForm}>Sign Up</button>
+          <button onClick={this.loginForm}>Login</button>
         </div>
-      )
-      }
-      else if(this.state.signup===true){
-        return <Form showName={true} name="" username="" password="" SubmitHandler={this.signupHandler}/>
+      );
+    } else if (this.state.signup === true) {
+      return (
+        <Form
+          showName={true}
+          name=""
+          username=""
+          password=""
+          SubmitHandler={this.signupHandler}
+        />
+      );
+    } else if (this.state.login === true) {
+      return (
+        <Form
+          showName={false}
+          name=""
+          username=""
+          password=""
+          SubmitHandler={this.loginHandler}
+        />
+      );
+    } else {
+      //person is logged in, show search component,currencyContainer, etc.
+    }
+  };
 
-      }
-      else if(this.state.login===true){
-        return <Form showName={false} name="" username="" password="" SubmitHandler={this.loginHandler}/>
-      }
-      else{
-        //person is logged in, show search component,currencyContainer, etc.
-      }
-  }
-
-  imageHandler = (obj) => {
-    console.log("image handler")
+  imageHandler = obj => {
+    console.log('image handler');
     this.setState({
-      theCoin:obj,
-      showCoin:true
-    })
-  }
+      theCoin: obj,
+      showCoin: true
+    });
+  };
 
   BackHandler = () => {
     this.setState({
       theCoin: null,
-      showCoin:false
-    })
-  }
+      showCoin: false
+    });
+  };
 
   render() {
-   
-    const  {rerender} = this.state;
+    const { rerender } = this.state;
     // console.log(this.props, 'home')
-    console.log(this.state.showCoin)
+    console.log(this.state.showCoin);
     return (
-      <div >
+      <div>
         <MuiThemeProvider>
-        
-        <Search searchData={this.state.search} getSearchedCurrencies={this.getSearchedCurrencies}/> </MuiThemeProvider>
-        <CurrencyCollection imageHandler={this.imageHandler} active={this.props.active ? true : false} cryptos={this.state.loggedIn ? rerender : rerender} activeUser={this.props.activeUser}/>
+          <>
+            <section className="jsx-1013649062 marketingSection">
+              <h3 className="hold_divs landing-title">
+                Get the best coins out there.
+              </h3>
+              <p className="jsx-1013649062 landing-tagline">
+                Stop wasting time tracking individual coins and take away the
+                element of surprise by having the best platform to do it. It
+                gives you an instant relief as you track the coins fluctuation.
+                Learn, and build wealth all in one place.
+              </p>
+              <div style={{ marginTop: '2em' }} className="button_div">
+                <div className="signup-button" href="/signup">
+                  Sign up
+                </div>
+              </div>
+              <div className="landing-btc">
+                <img src="./bc.jpeg" className="btc" syle={{ width: '40px' }} />
+              </div>
+            </section>
+            <h1 className="ui block header w-o-Border">
+              Top 20 Currencies and More
+            </h1>{' '}
+          </>
+          <Search
+            searchData={this.state.search}
+            getSearchedCurrencies={this.getSearchedCurrencies}
+          />{' '}
+        </MuiThemeProvider>
+        <CurrencyCollection
+          imageHandler={this.imageHandler}
+          active={this.props.active ? true : false}
+          cryptos={this.state.loggedIn ? rerender : rerender}
+          activeUser={this.props.activeUser}
+        />
         {/*this.loginRender()*/}
-        {this.state.showCoin ? <CoinDetails BackHandler={this.BackHandler} coin={this.state.theCoin} /> :null}
+        {this.state.showCoin ? (
+          <CoinDetails
+            BackHandler={this.BackHandler}
+            coin={this.state.theCoin}
+          />
+        ) : null}
       </div>
-    )
+    );
   }
 }
 
