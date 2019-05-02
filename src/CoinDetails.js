@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 export default class CoinDetails extends Component {
 
 
-
-  
   render() {
     console.log(this.props.coin)
     const { coin } = this.props;
