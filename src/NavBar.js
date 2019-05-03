@@ -14,9 +14,10 @@ export default class NavBar extends Component {
   };
 
   navBarFunc = () => {
-    if (this.checkToken()) {
+    if (this.props.token) { //show log out 
       this.showLogOutAndHandleToken();
     } 
+
     if (this.checkToken()) {
       return (
         <>
@@ -33,7 +34,6 @@ export default class NavBar extends Component {
                 style={{
                   width: '100px',
                   padding: '12px',
-                  width: '100px',
                   margin: '0',
                   borderRadius: '5px',
                   background: '#ADD8E6',
@@ -65,7 +65,7 @@ export default class NavBar extends Component {
             </div>
 
             <div className="item">
-              {!this.checkToken() && (
+              {this.checkToken() === 'false' && (
                 <NavLink
                   to="/login"
                   style={{
@@ -83,8 +83,8 @@ export default class NavBar extends Component {
                 </NavLink>
               )}
             </div>
-            <div className="item">
-              {!this.checkToken() && (
+            {/* <div className="item">
+              {!this.props.token && (
                 <NavLink
                   to="/signupForm"
                   style={{
@@ -101,10 +101,11 @@ export default class NavBar extends Component {
                   Sign up
                 </NavLink>
               )}
-            </div>
+            </div> */}
             
             {
-              this.checkToken() ? <div className="right item">
+              this.checkToken() ? 
+              <div className="right item">
               <NavLink
                 exact
                 style={{
@@ -136,6 +137,7 @@ export default class NavBar extends Component {
 
   checkToken = () => {
     const token = localStorage.getItem('token');
+    console.log("CHECK TOKEN FUCN: ", token)
     if (token) {
       return true;
     }
@@ -187,12 +189,12 @@ export default class NavBar extends Component {
   render() {
 
     console.log("Active : ", this.props.token, 
-     " User Props: ", this.props.user, 
-      "checkToken: ", this.props.checkToken )
-
+    //  " User Props: ", this.props.name, 
+      "checkToken: ", this.checkToken() )
+      console.log( "checkToken: ", this.checkToken() )
     return (
       <>{
-        this.props.token ?  
+        this.checkToken() ?  
         <>
         {this.navBarFunc()}
         </>
