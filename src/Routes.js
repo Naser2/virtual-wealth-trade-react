@@ -9,6 +9,7 @@ import NavBar from './NavBar';
 import SignupForm from './SignupForm';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import CurrencyCollection from './components/presentational/CurrencyCollection';
 
 class Routes extends React.Component {
   state = {
@@ -17,16 +18,45 @@ class Routes extends React.Component {
   };
 
   componentDidMount() {
-    //console.log('ROUTES')
-    let token = localStorage.getItem('token');
-    //console.log(token, 'TOKEN')
+    // //console.log('ROUTES')
+    // let token = localStorage.getItem('token');
+    // //console.log(token, 'TOKEN')
 
+    // if (token) {
+    //   const res = jwt.decode(token);
+    //   this.setState({
+    //     user: res.data
+    //   });
+    // }
+    let token = localStorage.getItem('token');
+    let auth = localStorage.getItem('auth');
+    console.log(auth, 'auth');
+    let name = localStorage.getItem('name');
+
+    auth = JSON.parse(auth);
+    console.log(auth, 'auth');
+    let activeUser = null;
     if (token) {
       const res = jwt.decode(token);
-      this.setState({
-        user: res.data
-      });
-    } 
+      console.log('DECODED RES:', res);
+      console.log('auth:', auth.name);
+      activeUser = {
+        user_id: auth.user_id,
+        name: auth.name,
+        username: auth.username,
+        token: auth.token
+      };
+      this.setState(
+        {
+          user_id: auth.user_id,
+          name: auth.name,
+          username: auth.username,
+          token: auth.token
+        },
+        () => console.log('STATE ACTIVE USER TOKEN: ', this.state.username)
+      );
+      console.log('ACTIVE USER: ', activeUser.user_id);
+    }
   }
   loginUser = (e, user) => {
     e.preventDefault();
@@ -37,10 +67,13 @@ class Routes extends React.Component {
         password: password
       })
       .then(res => {
+        console.log('LOGIN RES: ', res);
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('name', res.data.name);
         localStorage.setItem('auth', JSON.stringify(res.data));
         let current_user = {
           user_id: res.data.user_id,
+          name: res.data.name,
           username: res.data.username
         };
         // console.log('res from backend', this);
@@ -84,31 +117,60 @@ class Routes extends React.Component {
     });
   };
   render() {
-    let token = localStorage.getItem('token');
-    let auth = localStorage.getItem('auth');
-    auth = JSON.parse(auth);
-    console.log(auth, 'auth');
-    let activeUser = null;
-    if (token) {
-      const res = jwt.decode(token);
-      activeUser = res.data;
-    }
+    // let token = localStorage.getItem('token');
+    // let auth = localStorage.getItem('auth');
+    console.log('ROUTESSSsSS: ', this.state );
+    // let name = localStorage.getItem('name');
+
+    // auth = JSON.parse(auth);
+    // console.log(auth, 'auth');
+    // let activeUser = null;
+    // if (token) {
+    //   const res = jwt.decode(token);
+    //   console.log('DECODED RES:', res);
+    //   activeUser = {
+    //     user_id: auth.user_id,
+    //     name: auth.name,
+    //     user_name: auth.username,
+    //     token: auth.token
+    //   };
+    //   console.log('ACTIVE USER: ', this.state.user);
+    // }
 
     return (
       <Fragment>
-        <NavBar logOut={this.logOut} token={this.state.loggedIn} user={this.state.user}/>
+        <NavBar
+          logOut={this.logOut}
+          token={this.state.token}
+          name={this.state.name}
+          username={this.state.username}
+          user_id={this.state.user_id}
+        />
 
         <Route
           exact
           path="/"
           render={() => (
-            <Home active={this.state.loggedIn} activeUser={this.state.user} />
+            <Home active={this.state.loggedIn} user={this.state.user} 
+            token={this.state.token}
+         name={this.state.name}
+         username={this.state.username}
+         user_id={this.state.user_id}
+            />
           )}
         />
+
         <Route
           exact
           path="/Profile"
-          render={() => <Profile activeUser={activeUser} auth={auth} />}
+          render={() => <Profile user={this.state.user} 
+          token={this.state.token}
+          name={this.state.name}
+          username={this.state.username}
+          user_id={this.state.user_id}
+
+          auth={this.state.user} 
+          />}
         />
 
         <Route
@@ -121,10 +183,18 @@ class Routes extends React.Component {
           path="/login"
           render={() => <Login loginUser={this.loginUser} />}
         />
-         {/* <Route exact path="!#" 
-         render={() => <NavBar token={this.state.loggedIn} user={this.state.user}/>} /> */}
-        <Route exact path="/currency" component={Currency} />
+        <Route exact path="!#" 
+         render={() => <CurrencyCollection
+         token={this.state.token}
+         name={this.state.name}
+         username={this.state.username}
+         user_id={this.state.user_id}
         
+         />} />
+        <Route exact path="/currency" component={Currency}  token={this.state.token}
+          name={this.state.name}
+          username={this.state.username}
+          user_id={this.state.user_id}/>
       </Fragment>
     );
   }
