@@ -39,18 +39,26 @@ class Profile extends Component {
 
   handleClick = clickedCoin => {
     let assets = localStorage.getItem('assets');
-    assets = JSON.parse(assets);
-    const { username } = this.props.activeUser;
-    console.log(username, 'user');
-    assets[username] = assets[username].filter(coin => {
-      return coin.id !== clickedCoin.id;
-    });
-    localStorage.setItem('assets', JSON.stringify(assets));
-    this.setState({
-      selected: assets[username],
-      theCoin: null
-    });
-    console.log('Asked to delete thissss');
+    console.log('ASSETS: ', assets);
+    console.log('PROPS DOT USERNAME UN_WATCH 1 : ', this.props.username);
+    if (assets) {
+      assets = JSON.parse(assets);
+      const username = this.props.username;
+      console.log("USERNAME DESTRUCTURED IN COLLECTION 1: ", 
+      username);
+      console.log("APPEDING USERNAME to ASSESR: ", 
+      assets[this.props.username]);
+      
+      assets['undefined'] = assets['undefined'].filter(coin => {
+        return coin.id !== clickedCoin.id;
+      });
+      localStorage.setItem('assets', JSON.stringify(assets));
+      this.setState({
+        selected: assets[this.props.username],
+        theCoin: null
+      });
+      console.log('Asked to delete thissss');
+    }
   };
 
   componentDidMount() {
@@ -60,8 +68,8 @@ class Profile extends Component {
     }
     if (this.props.token !== null) {
       let assets = localStorage.getItem('assets');
-      const { username } = this.props;
-      console.log('PROFILE', username, assets, 'username, assets');
+      const username = this.props.username;
+      console.log('PROFILE USERNAME: ', username, 'ASSETS: ', assets);
       if (assets) {
         assets = JSON.parse(assets);
         if (assets[username]) {
@@ -182,6 +190,24 @@ class Profile extends Component {
     });
   };
   render() {
+    // console.log('PROFILE', this.props.loginUser);
+    // if (this.props.loginUser === null) {
+    //   this.props.history.replace('/');
+    // }
+    // if (this.props.token !== null) {
+    //   let assets = localStorage.getItem('assets');
+    //   const username = this.props.username;
+    //   console.log('PROFILE USERNAME: ', username, 'ASSETS: ', assets);
+    //   if (assets) {
+    //     assets = JSON.parse(assets);
+    //     if (assets[username]) {
+    //       this.setState({
+    //         selected: assets[username]
+    //       });
+    //     }
+    //   }
+    // }
+    // console.log('PROFILE  RENDER  :', this.props.username);
     // const {user_id, name, user_name, token } = this.props.user
     // console.log('HEADER RENDER CHECK1 ', user_name, user_id, name );
 
@@ -194,10 +220,9 @@ class Profile extends Component {
           {/* <RevealExampleFade username={username} SubmitHandler={this.patchOrPost} showEditForm={this.showEditForm}/> */}
           <ProfileHeader
             // username={username}
-            user_id= {this.props.user_id}
-            name= {this.props.name}
-            username= {this.props.username}
-
+            user_id={this.props.user_id}
+            name={this.props.name}
+            username={this.props.username}
             patchOrPost={this.patchOrPost}
             showEditForm={this.showEditForm}
             user={this.props.user}
