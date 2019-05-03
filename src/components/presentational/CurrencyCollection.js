@@ -31,13 +31,17 @@ export default class CurrencyCollection extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { username } = this.props.username;
+    console.log('ccccc',username );
+    console.log('CURENCYIES : ', this.props);
+    // e.preventDefault();
 
-    if (this.props.activeUser === null) {
+    if (this.props.active) {
       return (
         <SweetAlert title="Here's a message!" onConfirm={this.onConfirm} />
       );
     } else {
-      const { username } = this.props.activeUser;
+      const { username } = this.props.username;
       const assets = {
         [username]: [...this.state.selectedCoins]
       };
@@ -78,18 +82,13 @@ export default class CurrencyCollection extends Component {
   };
 
   btnMessage = () => {
-   
-      alert("You need to LOGIN to Save")
-      // <h1 className="alert">
-      //   alert(You need to <span style={{ color: '#ffcd0b' }}>LOGIN</span> to Save)
-      // </h1>
-    // );
-    // window.location.href ='http://localhost:3000/login'
+    alert('You need to LOGIN to Save');
   };
   verifySaveBtnOption = () => {
     if (this.props.profile) {
       return null;
-    } else if (!this.props.profile && !this.props.activeUser) {
+    }
+     else if (!this.props.profile && !this.props.active) {
       return (
         <button
           className="ui blue big button button_ele"
@@ -101,7 +100,7 @@ export default class CurrencyCollection extends Component {
       );
     } else {
       return (
-        <button className="ui blue big button button_ele" type="submit">
+        <button className="ui blue big button button_ele" type="submit" onClick={(e)=> this.handleSubmit(e)}>
           Save
         </button>
       );
@@ -152,16 +151,6 @@ export default class CurrencyCollection extends Component {
           </form>
           <br />
           {this.verifySaveBtnOption()}
-          {/* {this.props.profile  ?
-            null : 
-          
-          (
-            <button className="ui blue big button" type="submit">
-              Save
-            </button>
-          )
-         
-          }  */}
         </form>
       </div>
     );
