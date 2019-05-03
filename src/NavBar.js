@@ -137,7 +137,7 @@ export default class NavBar extends Component {
 
   checkToken = () => {
     const token = localStorage.getItem('token');
-    console.log("CHECK TOKEN FUCN: ", token)
+    // console.log("CHECK TOKEN FUCN: ", token)
     if (token) {
       return true;
     }
