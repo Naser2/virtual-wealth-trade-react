@@ -49,7 +49,7 @@ class Profile extends Component {
       console.log("APPEDING USERNAME to ASSESR: ", 
       assets[this.props.username]);
       
-      assets['undefined'] = assets['undefined'].filter(coin => {
+      assets[this.props.username] = assets[this.props.username].filter(coin => {
         return coin.id !== clickedCoin.id;
       });
       localStorage.setItem('assets', JSON.stringify(assets));
