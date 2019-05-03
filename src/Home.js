@@ -92,7 +92,7 @@ class Home extends Component {
     } else if (this.state.signup === true) {
       return (
         <Form
-          showName={true}
+          // showName={true}
           name=""
           username=""
           password=""
@@ -102,7 +102,7 @@ class Home extends Component {
     } else if (this.state.login === true) {
       return (
         <Form
-          showName={false}
+          // showName={false}
           name=""
           username=""
           password=""
@@ -211,6 +211,11 @@ class Home extends Component {
           active={this.props.active ? true : false}
           cryptos={this.state.loggedIn ? rerender : rerender}
           activeUser={this.props.activeUser}
+        //   token={this.state.token}
+        //  name={this.state.name}
+         username={this.props.username}
+        //  user_id={this.state.user_id}
+
         />
         {/* {this.loginRender()} */}
            
