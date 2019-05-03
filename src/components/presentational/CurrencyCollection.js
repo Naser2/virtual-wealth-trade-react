@@ -47,7 +47,7 @@ export default class CurrencyCollection extends Component {
     
     if(this.props.active) {
       // const { username } = this.props.username;
-      // console.log('ccccc',username );
+      console.log(' PROPS USERNAME ',this.props.username );
       console.log('CURENCYIES : ', this.props);
 
 
@@ -122,7 +122,7 @@ export default class CurrencyCollection extends Component {
   render() {
     let { cryptos } = this.props;
 
-console.log("CRYPTO PROPS  :", crypto, "PROPS: ",  this.props)
+console.log("CRYPTO PROPS  :", cryptos, "PROPS: ",  this.props)
     console.log("PROPS DOT PROFILE :", this.props.profile && this.props.active)
     console.log("PROPS DOT ACTIVE :",  this.props.active)
     let cryptoArr = cryptos.map(cryptoObj => {
