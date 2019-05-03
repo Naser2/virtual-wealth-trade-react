@@ -18,7 +18,7 @@ class Routes extends React.Component {
   };
 
   componentDidMount() {
-    // //console.log('ROUTES')
+    //console.log('ROUTES')
     // let token = localStorage.getItem('token');
     // //console.log(token, 'TOKEN')
 
@@ -53,7 +53,7 @@ class Routes extends React.Component {
           username: auth.username,
           token: auth.token
         },
-        () => console.log('STATE ACTIVE USER TOKEN: ', this.state.username)
+        () => console.log('STATE ACTIVE USER-NAME: ', this.state.username)
       );
       console.log('ACTIVE USER: ', activeUser.user_id);
     }
@@ -76,7 +76,7 @@ class Routes extends React.Component {
           name: res.data.name,
           username: res.data.username
         };
-        // console.log('res from backend', this);
+        console.log("LOGGED IN :" ,localStorage.getItem('token'));
         this.setState({
           loggedIn: localStorage.getItem('token'),
           user: current_user
@@ -151,7 +151,7 @@ class Routes extends React.Component {
           exact
           path="/"
           render={() => (
-            <Home active={this.state.loggedIn} user={this.state.user} 
+        <Home active={this.state.loggedIn} user={this.state.user} 
             token={this.state.token}
          name={this.state.name}
          username={this.state.username}
@@ -170,6 +170,7 @@ class Routes extends React.Component {
           user_id={this.state.user_id}
 
           auth={this.state.user} 
+          loggedIn={this.state.loggedIn} 
           />}
         />
 
