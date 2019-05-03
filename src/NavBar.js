@@ -17,7 +17,7 @@ export default class NavBar extends Component {
     if (this.checkToken()) {
       this.showLogOutAndHandleToken();
     } 
-    if (this.props.token) {
+    if (this.checkToken()) {
       return (
         <>
           <div
@@ -104,7 +104,7 @@ export default class NavBar extends Component {
             </div>
             
             {
-              this.props.token ? <div className="right item">
+              this.checkToken() ? <div className="right item">
               <NavLink
                 exact
                 style={{
