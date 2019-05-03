@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { BorderColor } from 'material-ui-icons';
-// import PropTypes from 'prop-types'
 
 export default class LogIn extends Component {
   state = {
@@ -74,7 +71,7 @@ export default class LogIn extends Component {
             </button>
           </form>
           <div class="ui segment bottom attached">
-            Not registered? <a>Sign up here</a>.
+            Not registered? <a href="!#">Sign up here</a>.
           </div>
         </div>
       </div>
