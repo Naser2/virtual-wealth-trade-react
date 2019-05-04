@@ -10,6 +10,7 @@ import CoinDetails from './CoinDetails';
 import { NavLink, Link } from 'react-router-dom';
 import CurrencyCollection from './components/presentational/CurrencyCollection';
 import Profile from './Profile';
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 class Home extends Component {
   state = {
@@ -143,7 +144,9 @@ getCryptos = () => {
   };
   render() {
     const { rerender } = this.state;
-    // console.log(this.props, 'home')
+    console.log("HOME STATE: ", this.state )
+    console.log("HOME RERENDER:  ", rerender )
+    
     console.log(this.state.showCoin);
     console.log('Checking Props: ', this.props.active);
     return (
@@ -151,6 +154,15 @@ getCryptos = () => {
         <MuiThemeProvider>
           <>
             <section className="jsx-1013649062 marketingSection">
+            {/* <SweetAlert
+                show={this.state.newAddressSaved}
+                title="New Address"
+                text="New Address Saved Successfully"
+                onConfirm={() => {
+                  this.setState({ newAddressSaved: false });
+                  window.location.href = '/profile';
+                }}
+              /> */}
               {this.props.active ? (
                 <>
                   <h3 className="hold_divs landing-title">
