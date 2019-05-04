@@ -23,7 +23,7 @@ const RevealExampleFade = props => (
       </h5>
     </Reveal.Content>
     <Reveal.Content hidden>
-      <h1 className="ui block header" onClick={props.showEditFor}>
+      <h1 className="ui block header" onClick={props.showEditForm}>
         Edit Profile
       </h1>
       <h5>{props.username} </h5>
