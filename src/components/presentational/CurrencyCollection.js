@@ -3,7 +3,8 @@ import Currency from './Currency';
 import Profile from '../../Profile';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
-import SweetAlert from 'react-bootstrap-sweetalert';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default class CurrencyCollection extends Component {
   state = {
@@ -11,8 +12,29 @@ export default class CurrencyCollection extends Component {
     username: '',
     newCoinSaved: false
   };
-  onConfirm = () => {};
+  MySwal = withReactContent(Swal)
 
+  sweetAlertFunc = (props) => {
+    console.log("SWAL ROPS", props)
+    Swal.fire(
+      'Great!',
+      'Your coin(s) is being watched!',
+      <h4>Your coin(s) {props} is being watched!</h4>,
+      'success'
+    ).then(() => window.location.assign('/profile'))
+    // console.log("SELECTED SWEET == TRUE ", this.state.selectedCoins.length) 
+      // this.MySwal.fire({
+      //   title: <p>Hello World</p>,
+      //   footer: 'Copyright 2018',
+      //   onOpen: () => {
+      //     // `MySwal` is a subclass of `Swal`
+      //     //   with all the same instance & static methods
+      //    this.MySwal.clickConfirm()
+      //   }
+      // }).then(() => {
+      //   return this.MySwal.fire(<p>`${props}`</p>)
+      // })    
+  }
   handleCoinsChange = event => {
     const itemId = event.target.id;
     const coin = this.props.cryptos.find(c => c.id == itemId);
@@ -76,6 +98,8 @@ export default class CurrencyCollection extends Component {
               })
             ) {
               console.log(`${c.name} this coin was already added`);
+              let coinname = c.name 
+              this.sweetAlertFunc(coinname)
             } else {
               console.log(`${c.name} This coin was not  added`);
               oldAssets[username] = [
@@ -95,7 +119,7 @@ export default class CurrencyCollection extends Component {
         
       }
     }
-    this.setState({ newCoinSaved: true });
+    this.setState({ newCoinSaved: true }, ()=> { this.sweetAlertFunc()});
   };
 
   btnMessage = () => {
@@ -136,6 +160,8 @@ export default class CurrencyCollection extends Component {
   }
 
   render() {
+    const MySwal = withReactContent(Swal)
+
     console.log('SAVED : ', this.state.newCoinSaved);
     let { cryptos } = this.props;
 
@@ -161,20 +187,11 @@ export default class CurrencyCollection extends Component {
           <h1 className="ui block header profile">Your Currencies</h1>
         ) : (
           <>
-            {/* <>
-              <h3 class="hold_divs landing-title">Get your ideas out there.</h3>
-              <div style={{ marginTop: '2em' }} className="hold_divs">
-                <p class="hold_divs landing-tagline">
-                  Stop wasting time setting up a development environment.
-                  Repl.it gives you an instant IDE to learn, build, collaborate,
-                  and host all in one place.
-                </p>
-                <div className="hold_divs signup-button" href="/signup">
-                  Sign up
-                </div>
-              </div>
-            </> */}
             <h1 className="ui block header title">Search for Currencies </h1>{' '}
+            {this.state.newCoinSaved && 
+            this.sweetAlertFunc
+            
+            }
             {/* {this.state.newCoinSaved  ? (
               <SweetAlert
                 show={this.state.newCoinSaved}
