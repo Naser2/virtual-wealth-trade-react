@@ -22,14 +22,14 @@ export default class NavBar extends Component {
       return (
         <>
           <div
-            className="ui menu"
+            className="ui menu darken"
             style={{
               background: '#0d101e !important',
               borderBottom: 'solid 1px #292C41 !important'
             }}
           >
             <div className="item">
-              <NavLink
+              <a href='/'
                 to="/"
                 style={{
                   width: '100px',
@@ -39,10 +39,10 @@ export default class NavBar extends Component {
                   background: '#ADD8E6',
                   color: 'white'
                 }}
-                activeStyle={{ background: '#0084cc' }}
+                // activeStyle={{ background: '#0084cc' }}
               >
                 Home
-              </NavLink>
+              </a>
             </div>
             <div className="item">
               {this.checkToken() && (
