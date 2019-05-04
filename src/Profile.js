@@ -277,34 +277,13 @@ class Profile extends Component {
   render() {
     let username = this.props.username;
     let assets = localStorage.getItem('assets');
-    // const username = this.props.username;
     console.log('PROFILE USERNAME: ', username, 'ASSETS: ', assets);
-    // console.log('PROFILE', this.props.loginUser);
-    // if (this.props.loginUser === null) {
-    //   this.props.history.replace('/');
-    // }
-    // if (this.props.token !== null) {
-    //   let assets = localStorage.getItem('assets');
-    //   const username = this.props.username;
-    //   console.log('PROFILE USERNAME: ', username, 'ASSETS: ', assets);
-    //   if (assets) {
-    //     assets = JSON.parse(assets);
-    //     if (assets[username]) {
-    //       this.setState({
-    //         selected: assets[username]
-    //       });
-    //     }
-    //   }
-    // }
-    // console.log('PROFILE  RENDER  :', this.props.username);
-    // const {user_id, name, user_name, token } = this.props.user
-    // console.log('HEADER RENDER CHECK1 ', user_name, user_id, name );
-
     console.log('HEADER RENDER CHECK ', this.props.username);
-    // const { username } = this.props.user;
+
+
     return (
       <div>
-        <div className="ui raised container segment">
+        <div className="ui raised container segment profile-header-wrapper-style">
           <ProfileHeader
             // username={username}
             user_id={this.props.user_id}
@@ -329,7 +308,10 @@ class Profile extends Component {
           activeUser={this.props.activeUser}
           profile={true}
         />
-        <button onClick={this.deleteHandler}>Delete Profile</button>
+        <div class="btn-wrapper">
+        <a href="#!" className="to-delete button"  onClick={this.deleteHandler}>Delete profile</a>
+        </div>
+        {/* <button onClick={this.deleteHandler}>Delete Profile</button> */}
       </div>
     );
   }
