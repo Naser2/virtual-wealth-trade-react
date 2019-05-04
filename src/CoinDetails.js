@@ -22,7 +22,7 @@ export default class CoinDetails extends Component {
             <div className="description">
               Latest Update
             </div>
-            <button className="unwatch" onClick={() => this.props.handleClick(coin) }>Un-Wactch</button>
+            <button className="unwatch" onClick={() => this.props.handleClick(coin) }>Un-Watch</button>
           </div>
         </div>
       </div>

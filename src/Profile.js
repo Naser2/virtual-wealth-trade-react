@@ -10,6 +10,7 @@ import RevealExampleFade from './components/presentational/editProfile';
 import DividerExampleVerticalForm from './components/ProfileHeader';
 import ProfileHeader from './components/ProfileHeader';
 import jwt from 'jsonwebtoken';
+import Swal from 'sweetalert2';
 
 class Profile extends Component {
   state = {
@@ -37,95 +38,24 @@ class Profile extends Component {
       />
     );
   };
-
-  // handleClick = clickedCoin => {
-  //   let assets = localStorage.getItem('assets');
-  //   console.log('ASSETS: ', assets);
-  //   console.log('PROPS DOT USERNAME UN_WATCH 1 : ', this.props.username);
-  //   if (assets) {
-  //     assets = JSON.parse(assets);
-  //     const username = this.props.username;
-  //     console.log('USERNAME DESTRUCTURED IN COLLECTION 1: ', username);
-  //     console.log('APPEDING USERNAME to ASSESR: ', assets[this.props.username]);
-
-  //     assets[this.props.username] = assets[this.props.username].filter(coin => {
-  //       return coin.id !== clickedCoin.id;
-  //     });
-  //     localStorage.setItem('assets', JSON.stringify(assets));
-  //     this.setState({
-  //       selected: assets[this.props.username],
-  //       theCoin: null
-  //     });
-  //     console.log('Asked to delete thissss');
-  //   }
-  // };
-  // getAssets(){
-  //   this.setState({
-  //     username: this.props.username
-  //   })
-  //     console.log('PROFIEL PROPS USERNAME  : ', this.props.username);
-  //     console.log('PROFILE TOKEN ', this.props.token);
-  //     console.log('PROFILE LOGGEDIN ', this.props.loggedIn);
-  //     if (!this.props.loggedIn) {
-  //       this.props.history.replace('/');
-  //     }
-  //     if (this.props.loggedIn) {
-  //       let auth = localStorage.getItem('auth');
-  //       // const auth = jwt.decode(aut)
-
-  //       let username = this.props.username;
-  //       console.log('PROPS USERNAME  : ', username);
-  //       let assets = localStorage.getItem('assets');
-  //       // const username = this.props.username;
-  //       console.log('PROFILE USERNAME: ', username, 'ASSETS: ', assets);
-  //       if (assets) {
-  //         assets = JSON.parse(assets);
-  //         if (assets[username]) {
-  //           this.setState({
-  //             selected: assets[username]
-  //           });
-  //         }
-  //       }
-  //     }
-  // }
-  // componentDidMount() {
-  //   this.getAssets()
-  //   // alert("Hello Profile")
-  // // this.setState({
-  // //   username: this.props.username
-  // // })
-  // //   console.log('PROFIEL PROPS USERNAME  : ', this.props.username);
-  // //   console.log('PROFILE TOKEN ', this.props.token);
-  // //   console.log('PROFILE LOGGEDIN ', this.props.loggedIn);
-  // //   if (!this.props.loggedIn) {
-  // //     this.props.history.replace('/');
-  // //   }
-  // //   if (this.props.loggedIn) {
-  // //     let auth = localStorage.getItem('auth');
-  // //     // const auth = jwt.decode(aut)
-
-  // //     let username = this.props.username;
-  // //     console.log('PROPS USERNAME  : ', username);
-  // //     let assets = localStorage.getItem('assets');
-  // //     // const username = this.props.username;
-  // //     console.log('PROFILE USERNAME: ', username, 'ASSETS: ', assets);
-  // //     if (assets) {
-  // //       assets = JSON.parse(assets);
-  // //       if (assets[username]) {
-  // //         this.setState({
-  // //           selected: assets[username]
-  // //         });
-  // //       }
-  // //     }
-  //   // }
-  //   console.log('PROFILE  DI MD :', this.props);
-  // }
+  sweetAlertFunc = tobeDeleted => {
+    console.log('DELETETETETTETETTE  Sweet ', tobeDeleted);
+    Swal.fire(
+      'Warning!',
+      ` ${tobeDeleted} is deleted!`,
+      'info'
+    ).then(() => window.location.assign('/profile'));
+    
+  };
+  
   handleClick = clickedCoin => {
     let assets = localStorage.getItem('assets');
     assets = JSON.parse(assets);
     const { username } = this.props.activeUser;
     console.log(username, 'user');
     assets[username] = assets[username].filter(coin => {
+     let  tobeDeleted = clickedCoin.name
+      this.sweetAlertFunc(tobeDeleted)
       return coin.id !== clickedCoin.id;
     });
     localStorage.setItem('assets', JSON.stringify(assets));
@@ -133,6 +63,7 @@ class Profile extends Component {
       selected: assets[username],
       theCoin: null
     });
+    
     console.log('Asked to delete thissss');
   };
 

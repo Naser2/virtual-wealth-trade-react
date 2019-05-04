@@ -165,7 +165,7 @@ export default class NavBar extends Component {
             color: 'white'
           }}
           activeStyle={{ background: 'gray' }}
-          onClick={this.handleToken}
+          onClick={this.handleToken()}
           to="/"
         >
           Logout

@@ -13,26 +13,29 @@ export default class CurrencyCollection extends Component {
     newCoinSaved: false
   };
   MySwal = withReactContent(Swal);
-
+  getCoinName = (coinname) => {
+    console.log('SWAL passings ROPS', coinname);
+   this.sweetAlertFunc(coinname)
+  }
   sweetAlertFunc = coinname => {
-    // console.log('SWAL ROPS', coinname);
-    // Swal.fire(
-    //   'Great!',
-    //   `Your coin(s) ${coinname} is being watched!`,
-    //   'success'
-    // ).then(() => window.location.assign('/profile'));
+    console.log('SWAL ROPS IN SWEET ', coinname);
+    Swal.fire(
+      'Great!',
+      `Your coin(s) is being watched!`,
+      'success'
+    ).then(() => window.location.assign('/profile'));
     // console.log("SELECTED SWEET == TRUE ", this.state.selectedCoins.length)
-    this.MySwal.fire({
-      title: <p>Hello World</p>,
-      footer: 'Copyright 2018',
-      onOpen: () => {
-        // `MySwal` is a subclass of `Swal`
-        //   with all the same instance & static methods
-        Swal.clickConfirm();
-      }
-    }).then(() => {
-      return this.MySwal.fire(<p>Hello</p>);
-    });
+    // this.MySwal.fire({
+    //   title: <p>Hello World</p>,
+    //   footer: 'Copyright 2018',
+    //   onOpen: () => {
+    //     // `MySwal` is a subclass of `Swal`
+    //     //   with all the same instance & static methods
+    //     Swal.clickConfirm();
+    //   }
+    // }).then(() => {
+    //   return this.MySwal.fire(<p>Hello</p>);
+    // });
   };
   handleCoinsChange = event => {
     const itemId = event.target.id;
@@ -97,9 +100,10 @@ export default class CurrencyCollection extends Component {
               })
             ) {
               console.log(`${c.name} this coin was already added`);
-              let coinname = c.name;
+             const coinname = c.name;
+              this.getCoinName(coinname);
               console.log('SWAL passings ROPS', coinname);
-              this.sweetAlertFunc(coinname);
+             
             } else {
               console.log(`${c.name} This coin was not  added`);
               oldAssets[username] = [
@@ -202,7 +206,7 @@ export default class CurrencyCollection extends Component {
             ) : null} */}
           </>
         )}
-        <div className="swal2-container swal2-center swal2-fade swal2-shown" />
+
         <form className="ui form" id="order-form" onSubmit={this.handleSubmit}>
           <form>
             <div className="custom fields ui centered grid">{cryptoArr}</div>
