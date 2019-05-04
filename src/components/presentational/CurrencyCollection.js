@@ -3,8 +3,8 @@ import Currency from './Currency';
 import Profile from '../../Profile';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export default class CurrencyCollection extends Component {
   state = {
@@ -12,29 +12,28 @@ export default class CurrencyCollection extends Component {
     username: '',
     newCoinSaved: false
   };
-  MySwal = withReactContent(Swal)
+  MySwal = withReactContent(Swal);
 
-  sweetAlertFunc = (props) => {
-    console.log("SWAL ROPS", props)
-    Swal.fire(
-      'Great!',
-      'Your coin(s) is being watched!',
-      <h4>Your coin(s) {props} is being watched!</h4>,
-      'success'
-    ).then(() => window.location.assign('/profile'))
-    // console.log("SELECTED SWEET == TRUE ", this.state.selectedCoins.length) 
-      // this.MySwal.fire({
-      //   title: <p>Hello World</p>,
-      //   footer: 'Copyright 2018',
-      //   onOpen: () => {
-      //     // `MySwal` is a subclass of `Swal`
-      //     //   with all the same instance & static methods
-      //    this.MySwal.clickConfirm()
-      //   }
-      // }).then(() => {
-      //   return this.MySwal.fire(<p>`${props}`</p>)
-      // })    
-  }
+  sweetAlertFunc = coinname => {
+    // console.log('SWAL ROPS', coinname);
+    // Swal.fire(
+    //   'Great!',
+    //   `Your coin(s) ${coinname} is being watched!`,
+    //   'success'
+    // ).then(() => window.location.assign('/profile'));
+    // console.log("SELECTED SWEET == TRUE ", this.state.selectedCoins.length)
+    this.MySwal.fire({
+      title: <p>Hello World</p>,
+      footer: 'Copyright 2018',
+      onOpen: () => {
+        // `MySwal` is a subclass of `Swal`
+        //   with all the same instance & static methods
+        Swal.clickConfirm();
+      }
+    }).then(() => {
+      return this.MySwal.fire(<p>Hello</p>);
+    });
+  };
   handleCoinsChange = event => {
     const itemId = event.target.id;
     const coin = this.props.cryptos.find(c => c.id == itemId);
@@ -74,8 +73,8 @@ export default class CurrencyCollection extends Component {
 
       let userDataItems = localStorage.getItem('auth');
       let auth = JSON.parse(userDataItems);
-      console.log('USERNAME AUTH  :', auth);
-      console.log('USERNAME  :', auth['username']);
+      // console.log('USERNAME AUTH  :', auth);
+      // console.log('USERNAME  :', auth['username']);
       let username = auth['username'];
 
       const assets = {
@@ -98,8 +97,9 @@ export default class CurrencyCollection extends Component {
               })
             ) {
               console.log(`${c.name} this coin was already added`);
-              let coinname = c.name 
-              this.sweetAlertFunc(coinname)
+              let coinname = c.name;
+              console.log('SWAL passings ROPS', coinname);
+              this.sweetAlertFunc(coinname);
             } else {
               console.log(`${c.name} This coin was not  added`);
               oldAssets[username] = [
@@ -111,15 +111,15 @@ export default class CurrencyCollection extends Component {
           });
         } else {
           oldAssets = { ...oldAssets, ...assets };
-          
         }
         localStorage.setItem('assets', JSON.stringify(oldAssets)); //stringify
       } else {
         localStorage.setItem('assets', JSON.stringify(assets));
-        
       }
     }
-    this.setState({ newCoinSaved: true }, ()=> { this.sweetAlertFunc()});
+    this.setState({ newCoinSaved: true }, () => {
+      this.sweetAlertFunc();
+    });
   };
 
   btnMessage = () => {
@@ -160,7 +160,7 @@ export default class CurrencyCollection extends Component {
   }
 
   render() {
-    const MySwal = withReactContent(Swal)
+    const MySwal = withReactContent(Swal);
 
     console.log('SAVED : ', this.state.newCoinSaved);
     let { cryptos } = this.props;
@@ -188,10 +188,7 @@ export default class CurrencyCollection extends Component {
         ) : (
           <>
             <h1 className="ui block header title">Search for Currencies </h1>{' '}
-            {this.state.newCoinSaved && 
-            this.sweetAlertFunc
-            
-            }
+            {/* {this.state.newCoinSaved && this.sweetAlertFunc} */}
             {/* {this.state.newCoinSaved  ? (
               <SweetAlert
                 show={this.state.newCoinSaved}
@@ -205,6 +202,7 @@ export default class CurrencyCollection extends Component {
             ) : null} */}
           </>
         )}
+        <div className="swal2-container swal2-center swal2-fade swal2-shown" />
         <form className="ui form" id="order-form" onSubmit={this.handleSubmit}>
           <form>
             <div className="custom fields ui centered grid">{cryptoArr}</div>
