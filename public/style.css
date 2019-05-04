@@ -3,6 +3,27 @@ body {
   /* background: url('https://subtlepatterns.com/patterns/halftone.png'); */
   background-color: #1a2235;
 }
+/* .box {
+  width: 150px;
+  height: 150px;
+  background: red !important;
+  margin-top: 20px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.box:hover {
+  background-color: green !important;
+  cursor: pointer !important;
+  -webkit-transition: background-color 2s ease-out !important;
+  -moz-transition: background-color 2s ease-out !important;
+  -o-transition: background-color 2s ease-out !important;
+  transition: background-color 2s ease-out !important;
+} */
+
+/* div:hover {
+  color:  #ffcd0b;  
+} */
 
 .profile-form {
   background: #ffff;
@@ -114,7 +135,7 @@ body {
     padding: 50px !important;
     z-index: 10 !important; */
 /* } */
-.app-name{
+.app-name {
   color: #ffcd0b !important;
 }
 .ui.small.image {
@@ -203,6 +224,7 @@ body {
   font-weight: 800;
   font-family: Lato;
   background-color: #1a2235 !important;
+  /* background-color: #121c32 !important; */
 }
 .ui.menu.darken > :first-child {
   color: #ffcd0b !important;
@@ -226,11 +248,39 @@ body {
   font-family: Lato;
   background-color: #1a2235 !important;
 }
+.logout {
+  color: #31444c !important;
+}
 a:hover {
   background-color: #ffcd26 !important;
   color: #4286f4 !important;
   text-decoration: underline;
   -moz-text-decoration-color: #4286f4;
+}
+
+.unwatch {
+  margin: 3px;
+  background-color: #07c;
+  color: #fff;
+  border-radius: 0.28571429rem;
+  font-size: 19pt;
+  font-weight: 400;
+  font-family: Lato;
+  border: 2px solid orange;
+}
+
+.description {
+  color: #07c !important;
+  border-radius: 0.28571429rem;
+  font-size: 12pt;
+  font-weight: 500;
+  background-color: #96c6f345;
+  /* display: inline; */
+  width: 140px;
+  display: inline-block;
+}
+.header {
+  background-color: #f1c005ab !important;
 }
 /* 
 a:link {
@@ -274,7 +324,7 @@ a:active {
 
 .ui.block.header.w-o-Border {
   border: none !important;
-  /* border: solid 2px #ffcd0b !important; */
+  background-color: #1a2235 !important;
   color: #ffcd0b !important;
   /* white-space: nowrap; */
   /* overflow-x: auto; */
