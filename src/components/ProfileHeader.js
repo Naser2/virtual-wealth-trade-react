@@ -35,11 +35,11 @@ export default class ProfileHeader extends Component {
   render() {
     console.log('HEADER RENDER :', this.props);
     return (
-      <div>
-        <Segment placeholder>
+      <div >
+        <Segment placeholder className="profile-header-wrapper-style" style={{background: '#e9eced'}}>
           {/* <Form /> */}
-          <Grid columns={2} relaxed="very" stackable>
-            <Grid.Column>
+          <Grid columns={2} className="profile-header-style" relaxed="very" stackable>
+            <Grid.Column className="profile-header-style">
               <Image src="./stevie.jpg" size="small" />
               <span
                 style={{
