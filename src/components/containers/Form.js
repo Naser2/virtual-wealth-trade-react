@@ -54,21 +54,24 @@ componentDidMount(){
       <form onSubmit={e => this.submitHandler(e)} className="profile-form">
       
         {/* {this.props.showName ?  */}
+        
         <label htmlFor="name">Name</label>
         {/* : null} */}
         {/* {this.props.showName ? ( */}
-        <input
+        {/* <div className="form-item-wrapper"> */}
+        <input className="form-item-wrapper1"
           type="text"
           name="name"
           value={this.props.name}
           onChange={this.changeHandler}
         />
+         {/* </div> */}
         {/* )  : null} */}
         {/* {this.props.showName ?  */}
         <br />
         {/* : null } */}
         <label htmlFor="username">Username</label>
-        <input
+        <input className="form-item-wrapper2"
           type="text"
           name="username"
           value={this.state.username}
@@ -76,9 +79,10 @@ componentDidMount(){
         />
         <br />
         <label htmlFor="password">Password</label>
-        <input type="password" name="password" onChange={this.changeHandler} />
+        <input className="form-item-wrapper3" type="password" name="password" onChange={this.changeHandler} />
         <br />
         <input type="submit" />
+       
       </form>
     );
   }
