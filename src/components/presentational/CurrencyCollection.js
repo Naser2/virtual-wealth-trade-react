@@ -7,7 +7,9 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 
 export default class CurrencyCollection extends Component {
   state = {
-    selectedCoins: []
+    selectedCoins: [],
+    username: '',
+    newCoinSaved: false
   };
   onConfirm = () => {};
 
@@ -32,40 +34,42 @@ export default class CurrencyCollection extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if(this.props.active){
-
+    if (this.props.active) {
     }
-  
+
     // e.preventDefault();
 
     // if (this.props.active) {
     //   return (
     //     <SweetAlert title="Here's a message!" onConfirm={this.onConfirm} />
     //   );
-    // } 
-    
-    
-    if(this.props.active) {
+    // }
+
+    if (this.props.active) {
       // const { username } = this.props.username;
-      console.log(' PROPS USERNAME ',this.props.username );
+      console.log(' PROPS USERNAME ', this.props.username);
       console.log('CURENCYIES : ', this.props);
 
+      let userDataItems = localStorage.getItem('auth');
+      let auth = JSON.parse(userDataItems);
+      console.log('USERNAME AUTH  :', auth);
+      console.log('USERNAME  :', auth['username']);
+      let username = auth['username'];
 
-      const username = this.props.username;
       const assets = {
-        [this.props.username]: [...this.state.selectedCoins]
+        [username]: [...this.state.selectedCoins]
       };
       let oldAssets = localStorage.getItem('assets');
       if (oldAssets) {
         oldAssets = JSON.parse(oldAssets);
         //if user already saved assets
-        if (oldAssets[this.props.username]) {
+        if (oldAssets[username]) {
           //if user has assets in localStorage
 
           this.state.selectedCoins.forEach(c => {
-            console.log('ccccc', c, 'oldddddd', oldAssets[this.props.username]);
+            console.log('ccccc', c, 'oldddddd', oldAssets[username]);
             if (
-              oldAssets[this.props.username].find(a => {
+              oldAssets[username].find(a => {
                 console.log('ew Coinnn', c);
                 console.log('Old coinnn', a);
                 return a.id === c.id;
@@ -74,34 +78,34 @@ export default class CurrencyCollection extends Component {
               console.log(`${c.name} this coin was already added`);
             } else {
               console.log(`${c.name} This coin was not  added`);
-              oldAssets[this.props.username] = [
+              oldAssets[username] = [
                 //lets add the existing assets + the
-                ...oldAssets[this.props.username],
+                ...oldAssets[username],
                 c
               ];
             }
           });
         } else {
           oldAssets = { ...oldAssets, ...assets };
+          
         }
         localStorage.setItem('assets', JSON.stringify(oldAssets)); //stringify
       } else {
         localStorage.setItem('assets', JSON.stringify(assets));
+        
       }
-      
     }
+    this.setState({ newCoinSaved: true });
   };
 
   btnMessage = () => {
-
     alert('You need to LOGIN to Save');
   };
 
   verifySaveBtnOption = () => {
     if (this.props.profile) {
       return null;
-    }
-     else if (!this.props.profile && !this.props.active) {
+    } else if (!this.props.profile && !this.props.active) {
       return (
         <button
           className="ui blue big button button_ele"
@@ -113,18 +117,31 @@ export default class CurrencyCollection extends Component {
       );
     } else {
       return (
-        <button className="ui blue big button button_ele" type="submit" onClick={(e)=> this.handleSubmit(e)}>
+        <button
+          className="ui blue big button button_ele"
+          type="submit"
+          onClick={e => this.handleSubmit(e)}
+        >
           Save
         </button>
       );
     }
   };
+
+  componentDidMount() {
+    this.setState({
+      username: this.props.username,
+      newCoinSaved: false
+    });
+  }
+
   render() {
+    console.log('SAVED : ', this.state.newCoinSaved);
     let { cryptos } = this.props;
 
-console.log("CRYPTO PROPS  :", cryptos, "PROPS: ",  this.props)
-    console.log("PROPS DOT PROFILE :", this.props.profile && this.props.active)
-    console.log("PROPS DOT ACTIVE :",  this.props.active)
+    console.log('CRYPTO Pass as PROPS  :', cryptos, 'PROPS: ', this.props);
+    console.log('PROPS DOT PROFILE :', this.props.profile && this.props.active);
+    console.log('PROPS DOT ACTIVE :', this.props.active);
     let cryptoArr = cryptos.map(cryptoObj => {
       return (
         <Currency
@@ -158,6 +175,17 @@ console.log("CRYPTO PROPS  :", cryptos, "PROPS: ",  this.props)
               </div>
             </> */}
             <h1 className="ui block header title">Search for Currencies </h1>{' '}
+            {/* {this.state.newCoinSaved  ? (
+              <SweetAlert
+                show={this.state.newCoinSaved}
+                title="New Coin Saved"
+                text="New Address Saved Successfully"
+                onConfirm={() => {
+                  this.setState({ newCoinSaved: false });
+                  window.location.href = '/profile';
+                }}
+              />
+            ) : null} */}
           </>
         )}
         <form className="ui form" id="order-form" onSubmit={this.handleSubmit}>

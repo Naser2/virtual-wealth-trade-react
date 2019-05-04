@@ -14,50 +14,80 @@ import CurrencyCollection from './components/presentational/CurrencyCollection';
 class Routes extends React.Component {
   state = {
     user: null,
-    loggedIn: localStorage.getItem('token')
+    loggedIn: localStorage.getItem('token'),
+    username: localStorage.getItem('username')
   };
+
+  // componentDidMount() {
+  //   //console.log('ROUTES')
+  //   // let token = localStorage.getItem('token');
+  //   // //console.log(token, 'TOKEN')
+
+  //   // if (token) {
+  //   //   const res = jwt.decode(token);
+  //   //   this.setState({
+  //   //     user: res.data
+  //   //   });
+  //   // }
+  //   let token = localStorage.getItem('token');
+  //   let auth = localStorage.getItem('auth');
+  //   console.log(auth, 'auth');
+  //   let name = localStorage.getItem('name');
+
+  //   auth = JSON.parse(auth);
+  //   console.log(auth, 'auth');
+  //   let activeUser = null;
+  //   if (token) {
+  //     const res = jwt.decode(token);
+  //     console.log('DECODED RES:', res);
+  //     console.log('auth:', auth.name);
+  //     activeUser = {
+  //       user_id: auth.user_id,
+  //       name: auth.name,
+  //       username: auth.username,
+  //       token: auth.token
+  //     };
+  //     this.setState(
+  //       {
+  //         user_id: auth.user_id,
+  //         name: auth.name,
+  //         username: auth.username,
+  //         token: auth.token
+  //       },
+  //       () => console.log('STATE ACTIVE USER-NAME: ', this.state.username)
+  //     );
+  //     console.log('ACTIVE USER: ', activeUser.user_id);
+  //   }
+  // }
 
   componentDidMount() {
     //console.log('ROUTES')
-    // let token = localStorage.getItem('token');
-    // //console.log(token, 'TOKEN')
-
-    // if (token) {
-    //   const res = jwt.decode(token);
-    //   this.setState({
-    //     user: res.data
-    //   });
-    // }
     let token = localStorage.getItem('token');
-    let auth = localStorage.getItem('auth');
-    console.log(auth, 'auth');
-    let name = localStorage.getItem('name');
+    //console.log(token, 'TOKEN')
 
-    auth = JSON.parse(auth);
-    console.log(auth, 'auth');
-    let activeUser = null;
     if (token) {
       const res = jwt.decode(token);
-      console.log('DECODED RES:', res);
-      console.log('auth:', auth.name);
-      activeUser = {
-        user_id: auth.user_id,
-        name: auth.name,
-        username: auth.username,
-        token: auth.token
-      };
-      this.setState(
-        {
-          user_id: auth.user_id,
-          name: auth.name,
-          username: auth.username,
-          token: auth.token
-        },
-        () => console.log('STATE ACTIVE USER-NAME: ', this.state.username)
-      );
-      console.log('ACTIVE USER: ', activeUser.user_id);
+      this.setState({
+        user: res.data
+      });
+      //  fetch("http://localhost:3000/auth/current_user", {
+      //    headers: {
+      //      "Content-Type": "application/json",
+      //      Accepts: "application/json",
+      //      Authorization: token
+      //    }
+      //  }).then(resp => resp.json())
+      //    .then(resp => {
+      //      console.log(resp, 'api call')
+      //      this.setState({
+      //        user: resp
+      //      });
+      //    });
+    } else {
+     return  null;
     }
   }
+
   loginUser = (e, user) => {
     e.preventDefault();
     const { username, password } = user;
@@ -76,7 +106,7 @@ class Routes extends React.Component {
           name: res.data.name,
           username: res.data.username
         };
-        console.log("LOGGED IN :" ,localStorage.getItem('token'));
+        console.log('LOGGED IN :', localStorage.getItem('token'));
         this.setState({
           loggedIn: localStorage.getItem('token'),
           user: current_user
@@ -117,9 +147,28 @@ class Routes extends React.Component {
     });
   };
   render() {
-    // let token = localStorage.getItem('token');
-    // let auth = localStorage.getItem('auth');
-    console.log('ROUTESSSsSS: ', this.state );
+    let token = localStorage.getItem('token');
+    let auth = localStorage.getItem('auth');
+    auth = JSON.parse(auth);
+    console.log(auth, 'auth');
+    let activeUser = null;
+    if (token) {
+      const res = jwt.decode(token);
+      activeUser = res.data;
+    }
+
+    //   let token = localStorage.getItem("token");
+    //   let auth = localStorage.getItem("auth");
+    //   auth = JSON.parse(auth)
+    //   console.log(auth, 'auth')
+    //   let activeUser = null;
+    //   if (token) {
+    //     const res = jwt.decode(token);
+    //     activeUser = res.data
+    //   }
+    // // let token = localStorage.getItem('token');
+    // // let auth = localStorage.getItem('auth');
+    // console.log('ROUTESSSsSS: ', this.state);
     // let name = localStorage.getItem('name');
 
     // auth = JSON.parse(auth);
@@ -151,11 +200,13 @@ class Routes extends React.Component {
           exact
           path="/"
           render={() => (
-        <Home active={this.state.loggedIn} user={this.state.user} 
-            token={this.state.token}
-         name={this.state.name}
-         username={this.state.username}
-         user_id={this.state.user_id}
+            <Home
+              active={this.state.loggedIn}
+              user={this.state.user}
+              token={this.state.token}
+              name={this.state.name}
+              username={this.state.username}
+              user_id={this.state.user_id}
             />
           )}
         />
@@ -163,15 +214,17 @@ class Routes extends React.Component {
         <Route
           exact
           path="/Profile"
-          render={() => <Profile user={this.state.user} 
-          token={this.state.token}
-          name={this.state.name}
-          username={this.state.username}
-          user_id={this.state.user_id}
-
-          auth={this.state.user} 
-          loggedIn={this.state.loggedIn} 
-          />}
+          render={() => (
+            <Profile
+              activeUser={this.state.user}
+              token={this.state.token}
+              name={this.state.name}
+              username={this.state.username}
+              user_id={this.state.user_id}
+              auth={this.state.user}
+              loggedIn={this.state.loggedIn}
+            />
+          )}
         />
 
         <Route
@@ -184,18 +237,27 @@ class Routes extends React.Component {
           path="/login"
           render={() => <Login loginUser={this.loginUser} />}
         />
-        <Route exact path="!#" 
-         render={() => <CurrencyCollection
-         token={this.state.token}
-         name={this.state.name}
-         username={this.state.username}
-         user_id={this.state.user_id}
-        
-         />} />
-        <Route exact path="/currency" component={Currency}  token={this.state.token}
+        <Route
+          exact
+          path="!#"
+          render={() => (
+            <CurrencyCollection
+              token={this.state.token}
+              name={this.state.name}
+              username={this.state.username}
+              user_id={this.state.user_id}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/currency"
+          component={Currency}
+          token={this.state.token}
           name={this.state.name}
           username={this.state.username}
-          user_id={this.state.user_id}/>
+          user_id={this.state.user_id}
+        />
       </Fragment>
     );
   }

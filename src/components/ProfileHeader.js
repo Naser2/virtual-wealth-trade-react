@@ -16,6 +16,21 @@ export default class ProfileHeader extends Component {
   }
   componentDidMount() {
     console.log('HEADER DID MOUNT :', this.props.user);
+    let userDataItems = localStorage.getItem('auth');
+    let auth = JSON.parse(userDataItems);
+    console.log('USERNAME AUTH  :', auth);
+    console.log('USERNAME  :', auth['username']);
+    let username = auth['username'];
+    let name = auth['name'];
+    let token = auth['token'];
+    let user_id = auth['user_id'];
+    this.setState({
+      user_id: user_id,
+      username: username,
+      token: token,
+      name: name
+    });
+    let assets = localStorage.getItem('assets');
   }
   render() {
     console.log('HEADER RENDER :', this.props);
@@ -40,19 +55,35 @@ export default class ProfileHeader extends Component {
                   'margin-top': '7px'
                 }}
               >
-                {this.props.name}{' '}
+                {this.state.name}{' '}
+              </span>
+              <span
+                style={{
+                  color: '#FFF',
+                  background: 'rgb(35,205,253)',
+                  'padding-left': '8px',
+                  'padding-right': '8px',
+                  'padding-top': '5px',
+                  'padding-bottom': '5px',
+                  'border-radius': '5px',
+                  display: 'inherit',
+                  // width: '153px',
+                  'margin-top': '7px'
+                }}
+              >
+                {this.state.username}{' '}
               </span>
             </Grid.Column>
 
             <Grid.Column verticalAlign="middle">
               <h1
-                className="ui block header"
+                className="ui block header edit-profile"
                 onClick={() => this.props.showEditForm()}
               >
                 Edit Profile
               </h1>
               <Form
-                name={this.props.name}
+                name={this.state.name}
                 showName={() => this.props.showName()}
                 username={this.props.username}
               >

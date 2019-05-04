@@ -84,12 +84,20 @@ body {
   display: inline !important;
 }
 
+.ui.block.header.edit-profile {
+  margin-bottom: 12px !important;
+
+  
+} 
+
 .ui.block.header {
   color: #fff !important;
-  margin-left: 150px !important;
-  margin-right: 150px !important;
+  /* margin-left: 150px !important; */
+  /* margin-right: 150px !important; */
   background-color: #1a2235;
-  display: inline-block;
+  display: -webkit-inline-box;
+  /* width: 153px; */
+  text-align: center;
 }
 
 .ui.block.header.title {
