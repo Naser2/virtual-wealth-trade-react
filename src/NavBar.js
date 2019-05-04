@@ -27,9 +27,9 @@ export default class NavBar extends Component {
               background: '#0d101e !important',
               borderBottom: 'solid 1px #292C41 !important'
             }}
-          >
+          > 
             <div className="item">
-              <a href='/'
+              <a className="box" href='/'
                 to="/"
                 style={{
                   width: '100px',
@@ -63,6 +63,7 @@ export default class NavBar extends Component {
               ) //place edit/delete in a container name && link to setting
               }
             </div>
+            <a className="box">Contact </a>
 
             <div className="item">
               {this.checkToken() === 'false' && (
@@ -105,14 +106,14 @@ export default class NavBar extends Component {
             
             {
               this.checkToken() ? 
-              <div className="right item">
-              <NavLink
+              <div className="right item logout">
+              <a className="logout" href="#!"
                 exact
                 style={{
                   width: '100px',
                   padding: '12px',
                   margin: '0 6px 6px',
-                  background: 'gray',
+                  background: 'gray !important',
                   borderRadius: '5px',
                   textDecoration: 'none',
                   color: 'white'
@@ -122,7 +123,7 @@ export default class NavBar extends Component {
                 to="/"
               >
                 Logout
-              </NavLink>
+              </a>
             </div>:
             null
             }
