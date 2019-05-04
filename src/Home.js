@@ -146,7 +146,7 @@ getCryptos = () => {
     const { rerender } = this.state;
     console.log("HOME STATE: ", this.state )
     console.log("HOME RERENDER:  ", rerender )
-    
+
     console.log(this.state.showCoin);
     console.log('Checking Props: ', this.props.active);
     return (
@@ -171,6 +171,12 @@ getCryptos = () => {
                 </>
               ) : (
                 <>
+                 <h1 className="hold_divs landing-title">
+                    Welcome to <span className="app-name">Virtual Wealth</span>.
+                 </h1>
+                <h3 className="hold_divs landing-title">
+                    Get the best coins out there now!
+                  </h3>
                   <p className="jsx-1013649062 landing-tagline">
                     Stop wasting time tracking individual coins and take away
                     the element of surprise by having the best platform to do
